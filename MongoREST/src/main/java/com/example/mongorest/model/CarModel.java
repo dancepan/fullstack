@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Document(collection = "car")
 public class CarModel {
-	  private String id;
+//	  private String id; 
 	  private String maker;
 	  private String model;
 	  private String description;
