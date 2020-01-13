@@ -1,4 +1,4 @@
-package com.example.mongorest.model;
+package com.tips.restapi.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;

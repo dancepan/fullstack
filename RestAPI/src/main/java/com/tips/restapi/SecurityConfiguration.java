@@ -1,4 +1,4 @@
-package com.example.mongorest;
+package com.tips.restapi;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

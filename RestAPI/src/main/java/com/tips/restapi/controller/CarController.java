@@ -1,4 +1,4 @@
-package com.example.mongorest.controller;
+package com.tips.restapi.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.mongorest.model.CarModel;
-import com.example.mongorest.repository.CarRepository;
+import com.tips.restapi.model.CarModel;
+import com.tips.restapi.repository.CarRepository;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/")
