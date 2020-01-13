@@ -1,0 +1,23 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	controllerName="OpenUI5.controller.frame.Left">
+
+	<l:HorizontalLayout>
+		<l:content>
+			<VBox>
+				<Image width="200px" src="/images/OpenUI5_Logo.png"/>
+				<l:HorizontalLayout>
+					<Text text="{i18n>leftTitle}"/>
+				</l:HorizontalLayout>
+			
+				<Button id="contents1" text="content1" press=".onNavToContent1"/>
+            	<Button id="contents2" text="content2" press=".onNavToContent2"/>
+            </VBox>
+		</l:content>
+	</l:HorizontalLayout>
+	
+</mvc:View>

@@ -1,0 +1,4 @@
+.BORDER_RED    { border-style: dashed; color: red   ; }
+.BORDER_BLUE   { border-style: dashed; color: blue  ; }
+.BORDER_GREEN  { border-style: dashed; color: green ; }
+.BORDER_YELLOW { border-style: dashed; color: yellow; }
