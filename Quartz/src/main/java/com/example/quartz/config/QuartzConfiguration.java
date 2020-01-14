@@ -14,7 +14,7 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
-import com.example.quartz.controller.QuartzJobLauncher;
+import com.example.quartz.control.QuartzJobLauncher;
 
 /**
  * The Class QuartzConfiguration.
