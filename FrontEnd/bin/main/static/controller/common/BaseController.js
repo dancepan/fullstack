@@ -29,6 +29,8 @@ sap.ui.define([
         
         callAjax : function(oParam)
         {  
+            console.log("BaseController callAjax() oParam.url: " + oParam.url);
+            
         	var that   = this;
             var oModel = new sap.ui.model.json.JSONModel();
             
@@ -52,7 +54,46 @@ sap.ui.define([
                                   proxyFunc();
                               }
             });
+		},
+		
+		callAjax2 : function () {
+			console.log("callAjax2()");
+			
+			$.ajax({
+				 "url" : "http://localhost:8088/http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=bg9choiwFZX5JYcIIF76jFiVYe0VwiWdxdpCUldbALWxzJLNZA4Ipq2Z1SVqkZyWSW88og%2Bt8EiOCX9J%2BB3ZUw%3D%3D&numOfRows=100&pageNo=1&sidoName=%EC%9D%B8%EC%B2%9C&ver=1.3&_returnType=json",
+				"type" : "GET",
+				"success" : function(result) {
+				      if(result == null || result == ""){
+					console.log("해당 주소로 얻을수 있는 좌표가 없습니다. 주소값을 다시 입력하세요");
+				      }else{
+					$.each(result, function(i,value){
+						
+						//console.log("bbbbbbbbbbbbbbbb value :" + JSON.stringify(value, null, 2));
+						
+      	              var oModel = new JSONModel();
+		              oModel.setData(value); 
+						
+		              console.log(JSON.stringify(oModel, null, 2));
+		              
+				  	  if(result.data == null ){
+					       if(i==0){
+						$("#x_coords").attr("value",value.posX); 
+			$("#y_coords").attr("value",value.posY); 
+						$("#address").attr("value", value.address);
+					      }
+					   }
+				             });
+				      }
+				},
+				"async" : "false",
+				"dataType" : "json",
+				"error": function(x,o,e){
+					alert(x.status + ":" +o+":"+e);	
+				}
+				});
 		}
+
+
 
     });
 });

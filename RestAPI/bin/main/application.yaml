@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/rest_api
-    username: postgres
-    password: jade0312
+    url: jdbc:postgresql://localhost:5432/weather
+    username: mvp
+    password: mvp
   jpa:
     hibernate:
       ddl-auto: update

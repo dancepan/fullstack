@@ -40,6 +40,4 @@ public class CarModel implements Serializable {
         this.model = model;
         this.description = description;
     }
-    
-    public CarModel(){}
 }
