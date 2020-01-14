@@ -22,8 +22,6 @@ dependencies {
 
     compile             'org.springframework.boot:spring-boot-starter-security'
 
-	//implementation      'org.springframework.boot:spring-boot-starter-data-mongodb'
 	compile             'org.springframework.boot:spring-boot-starter-batch'
-	compile(group: 'org.postgresql', name: 'postgresql', version: '42.0.0')
-	
+	compile             'org.postgresql:postgresql:42.0.0'
 }
