@@ -1,4 +1,4 @@
-package com.example.quartz;
+package com.example.quartz.config;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
@@ -17,10 +17,9 @@ import com.example.quartz.model.FxMarketEvent;
 //import com.example.quartz.model.FxMarketEvent;
 import com.example.quartz.model.FxMarketPricesStore;
 import com.example.quartz.model.Trade;
-import com.example.quartz.processor.FxMarketEventProcessor;
-import com.example.quartz.quartz.QuartzConfiguration;
-import com.example.quartz.reader.FxMarketEventReader;
-import com.example.quartz.writer.StockPriceAggregator;
+import com.example.quartz.step.FxMarketEventProcessor;
+import com.example.quartz.step.FxMarketEventReader;
+import com.example.quartz.step.StockPriceAggregator;
 
 /**
  * 

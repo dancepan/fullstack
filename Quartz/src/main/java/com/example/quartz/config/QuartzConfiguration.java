@@ -1,4 +1,4 @@
-package com.example.quartz.quartz;
+package com.example.quartz.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+
+import com.example.quartz.controller.QuartzJobLauncher;
 
 /**
  * The Class QuartzConfiguration.

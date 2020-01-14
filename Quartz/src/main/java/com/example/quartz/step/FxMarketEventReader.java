@@ -1,4 +1,4 @@
-package com.example.quartz.reader;
+package com.example.quartz.step;
 
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
