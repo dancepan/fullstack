@@ -57,7 +57,7 @@ public class QuartzConfiguration {
 		ctFactory.setName("cron_trigger");
 		ctFactory.setGroup("cron_group");
 		//ctFactory.setCronExpression("0 0/2 * 1/1 * ? *");
-		ctFactory.setCronExpression("*/3 * * * * ?");
+		ctFactory.setCronExpression("*/10 * * * * ?");
 		return ctFactory;
 	}
 

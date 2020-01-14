@@ -50,7 +50,7 @@ public class QuartzJobLauncher extends QuartzJobBean {
 			JobExecution jobExecution = jobLauncher.run(job, new JobParameters());
 			log.info("{}_{} was completed successfully", job.getName(), jobExecution.getId());
 		} catch (Exception e) {
-			log.error("Encountered job execution exception!");
+			log.error("Encountered job execution exception!" + e.toString());
 		}
 
 	}

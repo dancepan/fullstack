@@ -20,9 +20,9 @@ public class JobInvokerController {
     @RequestMapping("/invokejob")
     public String handle() throws Exception {
  
-            JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
-                    .toJobParameters();
-            jobLauncher.run(processJob, jobParameters);
+        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
+            
+        jobLauncher.run(processJob, jobParameters);
  
         return "Batch job has been invoked";
     }
