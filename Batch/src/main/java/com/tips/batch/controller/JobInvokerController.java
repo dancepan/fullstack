@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
  
 @RestController
-public class JobInvokerController {
- 
+public class JobInvokerController
+{
     @Autowired
     JobLauncher jobLauncher;
  
@@ -18,8 +18,8 @@ public class JobInvokerController {
     Job processJob;
  
     @RequestMapping("/invokejob")
-    public String handle() throws Exception {
- 
+    public String handle() throws Exception
+    {
         JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
             
         jobLauncher.run(processJob, jobParameters);
@@ -27,4 +27,3 @@ public class JobInvokerController {
         return "Batch job has been invoked";
     }
 }
-
