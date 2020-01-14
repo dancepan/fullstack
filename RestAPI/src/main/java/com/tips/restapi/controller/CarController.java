@@ -2,7 +2,9 @@ package com.tips.restapi.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,11 +23,15 @@ public class CarController {
     CarRepository carRepository;
 
     @RequestMapping("/list")
-    public List<CarModel> list(Model model) {
-    	return carRepository.findAll();
+    public ResponseEntity<List<CarModel>> list(Model model) {
+    	List<CarModel> carModel = carRepository.findAll();
     	
         //model.addAttribute("carList", carRepository.findAll());
         //return "home";
+    	
+    	System.out.println(carModel);
+    	
+    	return ResponseEntity.ok(carModel);
     }
 
     @RequestMapping(value = "/addCar", method = RequestMethod.POST)

@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.example.mongorest'
+group = 'com.example.restapi'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -22,5 +22,8 @@ dependencies {
 
     compile             'org.springframework.boot:spring-boot-starter-security'
 
-	implementation      'org.springframework.boot:spring-boot-starter-data-mongodb'
+  //implementation      'org.springframework.boot:spring-boot-starter-data-mongodb'
+	compile             'org.postgresql:postgresql:version:42.0.0'
+	compile             'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile             'org.springframework.boot:spring-boot-starter-data-rest'
 }
