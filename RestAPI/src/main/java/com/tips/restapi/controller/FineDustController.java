@@ -18,7 +18,7 @@ import com.tips.restapi.repository.FineDustRepository;
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/")
 public class FineDustController {
-
+ 
     @Autowired
     FineDustRepository fineDustRepository;
 
