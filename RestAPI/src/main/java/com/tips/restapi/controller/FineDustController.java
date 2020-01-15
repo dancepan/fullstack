@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tips.restapi.common.RestResponseEntity;
 import com.tips.restapi.model.entity.FineDust;
-import com.tips.restapi.model.json.FineDustList;
+import com.tips.restapi.model.json.FineDustJson;
 import com.tips.restapi.repository.FineDustRepository;
 import com.tips.restapi.service.FineDustService;
 
@@ -54,11 +54,10 @@ public class FineDustController {
     private FineDustService fineDustService;
 
     @GetMapping("/finedustlist")
-    public RestResponseEntity<FineDustList> findFineDustList()
+    public RestResponseEntity<FineDustJson> findFineDustList()
     {
-        RestResponseEntity<FineDustList> result = null;
-        
-        result = new RestResponseEntity<FineDustList>(this.fineDustService.findFineDustList());
+        RestResponseEntity<FineDustJson> result = null;
+        result = new RestResponseEntity<FineDustJson>(this.fineDustService.findFineDustJson());
         
         return result;
     }

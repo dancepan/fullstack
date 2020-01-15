@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FineDustList
+public class FineDustJson
 {
     private String datatime;
     private String stationname;
@@ -21,5 +21,5 @@ public class FineDustList
     private String pm10value;
     
     @JsonProperty("fineDustList")
-    public ArrayList<FineDustList> FineDustList;
+    public ArrayList<FineDustJson> FineDustList;
 }
