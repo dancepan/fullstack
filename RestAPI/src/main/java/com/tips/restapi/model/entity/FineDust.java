@@ -1,4 +1,4 @@
-package com.tips.restapi.model;
+package com.tips.restapi.model.entity;
 
 import lombok.Builder;
 import lombok.Data;
