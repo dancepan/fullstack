@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tips.restapi.model.entity.FineDust;
-import com.tips.restapi.model.json.FineDustList;
+import com.tips.restapi.model.json.FineDustJson;
 import com.tips.restapi.repository.FineDustRepository;
 
 @Transactional
@@ -21,16 +21,16 @@ public class FineDustServiceImpl implements FineDustService
     @Autowired
     FineDustRepository fineDustRepository;
 
-    public FineDustList findFineDustList() throws InvalidParameterException 
+    public FineDustJson fineDustJson() throws InvalidParameterException
     {
-        FineDustList fineDustList = new FineDustList();
+        FineDustJson fineDustList = new FineDustJson();
 
-        ArrayList <FineDustList> fineDustList1 = new ArrayList<FineDustList>();
+        ArrayList <FineDustJson> fineDustList1 = new ArrayList<FineDustJson>();
         List<FineDust> fineDustEntityList = this.fineDustRepository.findAll();
         
         for(FineDust fineDustEntity : fineDustEntityList)
         {
-            FineDustList FineDustTemp = new FineDustList();
+            FineDustJson FineDustTemp = new FineDustJson();
             
             FineDustTemp.setCovalue(fineDustEntity.getCovalue());
             
