@@ -17,12 +17,16 @@
                          selectionMode="None"
                          rows="{/}"
                          visibleRowCount="auto"
-                         width="800px">
+                         width="1100px">
                     <t:columns>
-                        <t:Column resizable="true" hAlign="Center" width="300px"><Label text="Id"         /><t:template><Text text="{id}"></Text></t:template></t:Column>
-                        <t:Column resizable="true" hAlign="Center"              ><Label text="Maker"      /><t:template><Text text="{maker}"></Text></t:template></t:Column>
-                        <t:Column resizable="true" hAlign="Center"              ><Label text="Model"      /><t:template><Text text="{model}"></Text></t:template></t:Column>
-                        <t:Column resizable="true" hAlign="Center"              ><Label text="Description"/><t:template><Text text="{description}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="150px"><Label text="측정일"           /><t:template><Text text="{datatime}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="측정소"           /><t:template><Text text="{stationname}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="100px"><Label text="측정망"           /><t:template><Text text="{mangname}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="140px"><Label text="아황산가스 농도"     /><t:template><Text text="{so2value}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="140px"><Label text="일산화탄소 농도"     /><t:template><Text text="{covalue}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="140px"><Label text="오존 농도"         /><t:template><Text text="{o3value}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center" width="140px"><Label text="이산화질소 농도"     /><t:template><Text text="{no2value}"></Text></t:template></t:Column>
+                        <t:Column resizable="true" hAlign="Center"              ><Label text="미세먼지(PM10) 농도"/><t:template><Text text="{pm10value}"></Text></t:template></t:Column>
                     </t:columns>
                 </t:Table>
             </VBox>

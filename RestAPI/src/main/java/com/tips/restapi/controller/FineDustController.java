@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tips.restapi.model.CarModel;
-import com.tips.restapi.repository.CarRepository;
+import com.tips.restapi.model.FineDust;
+import com.tips.restapi.repository.FineDustRepository;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/")
-public class CarController {
+public class FineDustController {
 
     @Autowired
-    CarRepository carRepository;
+    FineDustRepository fineDustRepository;
 
-    @RequestMapping("/list")
-    public ResponseEntity<List<CarModel>> list(Model model) {
-    	List<CarModel> carModel = carRepository.findAll();
+    @RequestMapping("/finedustlist")
+    public ResponseEntity<List<FineDust>> list(Model model) {
+    	List<FineDust> carModel = fineDustRepository.findAll();
     	
         //model.addAttribute("carList", carRepository.findAll());
         //return "home";
@@ -35,8 +35,8 @@ public class CarController {
     }
 
     @RequestMapping(value = "/addCar", method = RequestMethod.POST)
-    public String addCar(@ModelAttribute CarModel car) {
-        carRepository.save(car);
+    public String addCar(@ModelAttribute FineDust findDust) {
+        fineDustRepository.save(findDust);
         return "redirect:home";
     }
 
