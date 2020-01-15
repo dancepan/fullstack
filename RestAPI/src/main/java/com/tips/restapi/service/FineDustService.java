@@ -6,5 +6,9 @@ import com.tips.restapi.model.json.FineDustJson;
 
 public interface FineDustService
 {
-    public FineDustJson fineDustJson() throws InvalidParameterException;
+//<<<<<<< HEAD
+//    public FineDustJson fineDustJson() throws InvalidParameterException;
+//=======
+    public FineDustJson findFineDustJson() throws InvalidParameterException;
+//>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
 }

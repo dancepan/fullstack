@@ -22,10 +22,14 @@ sap.ui.define([
             
             console.log(JSON.stringify(oModel, null, 2));
             
+            var oData = oModel.getProperty("/result/fineDustList");
+            
+            console.log(JSON.stringify(oData, null, 2));
+            
             var oTable = this.byId("idTable");
             
-            oTable.setModel(oModel);
-            oTable.setVisibleRowCount(oModel.getData().length);
+            oTable.setModel(new JSONModel(oData));
+            oTable.setVisibleRowCount(oData.length);
         },
         
         errorCallbackFunction : function()

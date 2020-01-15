@@ -57,8 +57,12 @@ public class FineDustController {
     public RestResponseEntity<FineDustJson> findFineDustList()
     {
         RestResponseEntity<FineDustJson> result = null;
-        
-        result = new RestResponseEntity<FineDustJson>(this.fineDustService.fineDustJson());
+//<<<<<<< HEAD
+//        
+//        result = new RestResponseEntity<FineDustJson>(this.fineDustService.fineDustJson());
+//=======
+        result = new RestResponseEntity<FineDustJson>(this.fineDustService.findFineDustJson());
+//>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
         
         return result;
     }

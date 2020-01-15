@@ -21,34 +21,47 @@ public class FineDustServiceImpl implements FineDustService
     @Autowired
     FineDustRepository fineDustRepository;
 
-    public FineDustJson fineDustJson() throws InvalidParameterException
+//<<<<<<< HEAD
+//    public FineDustJson fineDustJson() throws InvalidParameterException
+//=======
+    public FineDustJson findFineDustJson() throws InvalidParameterException 
+//>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
     {
-        FineDustJson fineDustList = new FineDustJson();
+//<<<<<<< HEAD
+//        FineDustJson fineDustList = new FineDustJson();
+//=======
+        FineDustJson fineDustJson = new FineDustJson();
+//>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
 
-        ArrayList <FineDustJson> fineDustList1 = new ArrayList<FineDustJson>();
+//<<<<<<< HEAD
+//        ArrayList <FineDustJson> fineDustList1 = new ArrayList<FineDustJson>();
+//=======
+        ArrayList <FineDustJson> fineDustJsonList = new ArrayList<FineDustJson>();
+//>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
         List<FineDust> fineDustEntityList = this.fineDustRepository.findAll();
         
         for(FineDust fineDustEntity : fineDustEntityList)
         {
-            FineDustJson FineDustTemp = new FineDustJson();
+//<<<<<<< HEAD
+//            FineDustJson FineDustTemp = new FineDustJson();
+//=======
+            FineDustJson fineDustJsonObj = new FineDustJson();
+//>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
             
-            FineDustTemp.setCovalue(fineDustEntity.getCovalue());
+            fineDustJsonObj.setDatatime   (fineDustEntity.getDatatime());      //-- 측정일
+            fineDustJsonObj.setStationname(fineDustEntity.getStationname());   //-- 측정소명
+            fineDustJsonObj.setMangname   (fineDustEntity.getMangname());      //-- 측정망정보
+            fineDustJsonObj.setSo2value   (fineDustEntity.getSo2value());      //-- 아황산가스 농도
+            fineDustJsonObj.setCovalue    (fineDustEntity.getCovalue());       //-- 일산화탄소 농도
+            fineDustJsonObj.setO3value    (fineDustEntity.getO3value());       //-- 오존 농도
+            fineDustJsonObj.setNo2value   (fineDustEntity.getNo2value());      //-- 이산화질소 농도
+            fineDustJsonObj.setPm10value  (fineDustEntity.getPm10value());     //-- 미세먼지(PM10) 농도
             
-            FineDustTemp.setDatatime   (fineDustEntity.getDatatime());      //-- 측정일
-            FineDustTemp.setStationname(fineDustEntity.getStationname());   //-- 측정소명
-            FineDustTemp.setMangname   (fineDustEntity.getMangname());      //-- 측정망정보
-            FineDustTemp.setSo2value   (fineDustEntity.getSo2value());      //-- 아황산가스 농도
-            FineDustTemp.setCovalue    (fineDustEntity.getCovalue());       //-- 일산화탄소 농도
-            FineDustTemp.setO3value    (fineDustEntity.getO3value());       //-- 오존 농도
-            FineDustTemp.setNo2value   (fineDustEntity.getNo2value());      //-- 이산화질소 농도
-            FineDustTemp.setPm10value  (fineDustEntity.getPm10value());     //-- 미세먼지(PM10) 농도
-            
-            
-            fineDustList1.add(FineDustTemp);
+            fineDustJsonList.add(fineDustJsonObj);
         }
         
-        fineDustList.setFineDustList(fineDustList1);
+        fineDustJson.setFineDustList(fineDustJsonList);
         
-        return fineDustList;
+        return fineDustJson;
     }
 }
