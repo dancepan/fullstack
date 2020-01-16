@@ -18,10 +18,10 @@ org:
             
 spring:
     datasource:
-        driverClassName: com.mysql.jdbc.Driver
-        password: dusgml1204
-        url: jdbc:mysql://localhost/test
-        username: root
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/batch_meta
+        username: batch_admin
+        password: batch_admin
     batch :
       job:  
         enabled : false

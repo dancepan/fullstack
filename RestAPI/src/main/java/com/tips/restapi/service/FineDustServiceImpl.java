@@ -38,8 +38,15 @@ public class FineDustServiceImpl implements FineDustService
 //=======
         ArrayList <FineDustJson> fineDustJsonList = new ArrayList<FineDustJson>();
 //>>>>>>> branch 'leehyounkyoo' of https://github.com/minjeongkoo/mvpTips
+        
+        // JPA 메소를 이용하여 리스트로 받아 처리한다.
         List<FineDust> fineDustEntityList = this.fineDustRepository.findAll();
         
+        // @Query annotaion 을 이용한 repository 생성 예정
+        // 이럴경우 LIST<Object[]> 행태로 받고 service 에서 Json 클래스로 변환해 주어야 함.
+        
+        // 1. List 형태로 받을 경우 아래와 같이 처리
+        // 2. @Query 결과로 받을 경우 Object를 클래스화 하는 로직 필요(구현예정)
         for(FineDust fineDustEntity : fineDustEntityList)
         {
 //<<<<<<< HEAD

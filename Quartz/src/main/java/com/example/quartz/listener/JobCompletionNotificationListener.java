@@ -36,16 +36,22 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             try (BufferedWriter fileWriter = Files.newBufferedWriter(path))
             {
                 fileWriter.write(HEADER);
+                
                 fileWriter.newLine();
-                for (StockPriceDetails pd : fxMarketPricesStore.values()) {
+                
+                for (StockPriceDetails pd : fxMarketPricesStore.values())
+                {
                     fileWriter.write(new StringBuilder().append(pd.getStock())
-                            .append(LINE_DILM).append(pd.getOpen())
-                            .append(LINE_DILM).append(pd.getClose())
-                            .append(LINE_DILM).append(pd.getLow())
-                            .append(LINE_DILM).append(pd.getHigh()).toString());
+                              .append(LINE_DILM).append(pd.getOpen())
+                              .append(LINE_DILM).append(pd.getClose())
+                              .append(LINE_DILM).append(pd.getLow())
+                              .append(LINE_DILM).append(pd.getHigh()).toString());
+                    
                     fileWriter.newLine();
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.error("Fetal error: error occurred while writing {} file", path.getFileName());
             }
         }

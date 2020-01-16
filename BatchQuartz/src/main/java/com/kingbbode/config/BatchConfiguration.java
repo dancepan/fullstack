@@ -1,21 +1,14 @@
 package com.kingbbode.config;
 
-/*
- * Created By Kingbbode
- * blog : http://kingbbode.github.io
- * github : http://github.com/kingbbode
- * 
- * Author                    Date                     Description
- * ------------------       --------------            ------------------
- * kingbbode                2017-08-02      
- */
+import java.util.List;
+import java.util.logging.Logger;
 
-import com.kingbbode.properties.QuartzProperties;
+import javax.sql.DataSource;
+
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.spi.JobFactory;
 import org.quartz.spi.TriggerFiredBundle;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -29,15 +22,24 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
-import javax.sql.DataSource;
-import java.util.List;
+/*
+ * Created By Kingbbode
+ * blog : http://kingbbode.github.io
+ * github : http://github.com/kingbbode
+ * 
+ * Author                    Date                     Description
+ * ------------------       --------------            ------------------
+ * kingbbode                2017-08-02      
+ */
+
+import com.kingbbode.properties.QuartzProperties;
 
 @Configuration
 @EnableConfigurationProperties(QuartzProperties.class)
 @EnableBatchProcessing
 public class BatchConfiguration {
     /**
-     * JobRegistry 에 Job 을 자동으로 등록하기 위한 설정.
+     * JobRegistry �뿉 Job �쓣 �옄�룞�쑝濡� �벑濡앺�?湲� �쐞�븳 �꽕�젙.
      *
      * @param jobRegistry ths Spring Batch Job Registry
      * @return JobRegistry BeanPostProcessor
@@ -50,7 +52,7 @@ public class BatchConfiguration {
     }
     
     /**
-     * Quartz Schedule Job 에 의존성 주입
+     * Quartz Schedule Job �뿉 �쓽議댁�? 二쇱?��
      * 
      * @param beanFactory application context beanFactory
      * @return the job factory
@@ -68,7 +70,7 @@ public class BatchConfiguration {
     }
     
     /**
-     * Scheduler 전체를 관리하는 Manager.
+     * Scheduler �쟾泥�?�� ?���由?�븯�뒗 Manager.
      *
      * @param datasource Spring datasource
      * @param quartzProperties quartz config    
@@ -83,13 +85,13 @@ public class BatchConfiguration {
         factory.setSchedulerName("SampleProject-0.0.1");
         //Register JobFactory
         factory.setJobFactory(jobFactory);
-        //Graceful Shutdown 을 위한 설정으로 Job 이 완료될 때까지 Shutdown 을 대기하는 설정
+        //Graceful Shutdown �쓣 �쐞�븳 �꽕�젙�쑝濡� Job �씠 �셿?��?���? �븣源뚯�? Shutdown �쓣 ��湲고�?�뒗 �꽕�젙
         factory.setWaitForJobsToCompleteOnShutdown(true);
-        //Job Detail 데이터 Overwrite 유무
+        //Job Detail �뜲�씠�꽣 Overwrite ��??���?
         factory.setOverwriteExistingJobs(true);
         //Register QuartzProperties
         factory.setQuartzProperties(quartzProperties.toProperties());
-        //Schedule 관리를 Spring Datasource 에 위임
+        //Schedule ?���由?���? Spring Datasource �뿉 �쐞�엫
         factory.setDataSource(datasource);
         //Register Triggers
         factory.setTriggers(registryTrigger);
@@ -98,7 +100,7 @@ public class BatchConfiguration {
     }
 
     /**
-     * Scheduler 에 Trigger 를 자동으로 등록하기 위한 설정.
+     * Scheduler �뿉 Trigger ?���? �옄�룞�쑝濡� �벑濡앺�?湲� �쐞�븳 �꽕�젙.
      *
      * @return the trigger [ ]
      */
@@ -108,10 +110,10 @@ public class BatchConfiguration {
     }
 
     /**
-     * Spring Framework 의 Shutdown Hook 설정.
-     * Quartz 의 Shutdown 동작을 위임받아 Graceful Shutdown 을 보장.
-     * Quartz 의 자체 Shutdown Plugin 을 사용하면 Spring 의 Datasource 가 먼저 Close 되므로,
-     * Spring 에게 Shutdown 동작을 위임하여, 상위에서 컨트롤.
+     * Spring Framework �쓽 Shutdown Hook �꽕�젙.
+     * Quartz �쓽 Shutdown �룞�옉�쓣 �쐞�엫諛쏆�? Graceful Shutdown �쓣 蹂댁?��.
+     * Quartz �쓽 �옄泥� Shutdown Plugin �쓣 �궗�슜�븯硫� Spring �쓽 Datasource 媛� ?��?���? Close �릺誘�濡�,
+     * Spring �뿉寃� Shutdown �룞�옉�쓣 �쐞�엫�븯�뿬, �긽�쐞�뿉�꽌 ?�⑦?��濡�.
      *
      * @param schedulerFactoryBean quartz schedulerFactoryBean.
      * @return SmartLifecycle
@@ -121,7 +123,7 @@ public class BatchConfiguration {
     public SmartLifecycle gracefulShutdownHookForQuartz(SchedulerFactoryBean schedulerFactoryBean) {
         return new SmartLifecycle() {
             private boolean isRunning = false;
-            private final Logger logger = LoggerFactory.getLogger(this.getClass());
+            private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
             @Override
             public boolean isAutoStartup() {
                 return true;
