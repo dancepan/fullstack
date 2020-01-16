@@ -7,6 +7,10 @@ spring:
   batch :
     job:  
       enabled : false
+    initialize-schema: ALWAYS
+  quartz:
+    jdbc:
+      initialize-schema: ALWAYS
 
 org:
   quartz:
