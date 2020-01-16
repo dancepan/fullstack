@@ -1,5 +1,7 @@
 package com.example.quartz.config;
 
+import org.quartz.spi.JobFactory;
+import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
@@ -8,9 +10,11 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 import com.example.quartz.etlprocess.FxMarketEvent;
 import com.example.quartz.etlprocess.FxMarketPricesStore;
@@ -95,4 +99,18 @@ public class BatchConfiguration
                                  .writer   (writerBean   ())
                                  .build();
     }
+    
+    // 새로 추가할 필요가..
+//    @Bean public JobFactory jobFactory(AutowireCapableBeanFactory beanFactory) 
+//    {
+//    	return new SpringBeanJobFactory()
+//    	{ 
+//    		@Override protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception 
+//    		{ 
+//    			Object job = super.createJobInstance(bundle); 
+//    			beanFactory.autowireBean(job); 
+//    			return job; 
+//    		} 
+//    	}; 
+//    }
 }
