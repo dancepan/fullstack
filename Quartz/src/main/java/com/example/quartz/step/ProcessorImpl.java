@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
-import com.example.quartz.model.FxMarketEvent;
-import com.example.quartz.model.Trade;
+import com.example.quartz.etlprocess.FxMarketEvent;
+import com.example.quartz.etlprocess.Trade;
 
 /**
  * The Class FxMarketEventProcessor.

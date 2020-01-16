@@ -6,7 +6,7 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.core.io.ClassPathResource;
 
-import com.example.quartz.model.FxMarketEvent;
+import com.example.quartz.etlprocess.FxMarketEvent;
 
 /**
  * The Class FxMarketEventReader.

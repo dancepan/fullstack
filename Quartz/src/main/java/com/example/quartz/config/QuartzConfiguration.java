@@ -14,7 +14,7 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
-import com.example.quartz.control.QuartzJobLauncher;
+import com.example.quartz.quartz.QuartzJob;
 
 /**
  * The Class QuartzConfiguration.
@@ -31,43 +31,58 @@ public class QuartzConfiguration
     private JobLocator jobLocator;
 
     @Bean
-    public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(JobRegistry jobRegistry) {
+    public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(JobRegistry jobRegistry)
+    {
         JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor = new JobRegistryBeanPostProcessor();
+        
         jobRegistryBeanPostProcessor.setJobRegistry(jobRegistry);
+        
         return jobRegistryBeanPostProcessor;
     }
     
     @Bean
-    public JobDetailFactoryBean jobDetailFactoryBean() {
+    public JobDetailFactoryBean jobDetailFactoryBean()
+    {
         JobDetailFactoryBean jobfactory = new JobDetailFactoryBean();
-        jobfactory.setJobClass(QuartzJobLauncher.class);
+        
+        jobfactory.setJobClass(QuartzJob.class);
+        
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("jobName", "fxmarket_prices_etl_job");
+        
+        map.put("jobName"    , "fxmarket_prices_etl_job");
         map.put("jobLauncher", jobLauncher);
-        map.put("jobLocator", jobLocator);
+        map.put("jobLocator" , jobLocator);
+        
         jobfactory.setJobDataAsMap(map);
         jobfactory.setGroup("etl_group");
         jobfactory.setName("etl_job");
+        
         return jobfactory;
     }
 
     // Job is scheduled after every 2 minute
     @Bean
-    public CronTriggerFactoryBean cronTriggerFactoryBean() {
+    public CronTriggerFactoryBean cronTriggerFactoryBean()
+    {
         CronTriggerFactoryBean ctFactory = new CronTriggerFactoryBean();
+    
         ctFactory.setJobDetail(jobDetailFactoryBean().getObject());
         ctFactory.setStartDelay(3000);
         ctFactory.setName("cron_trigger");
         ctFactory.setGroup("cron_group");
-        //ctFactory.setCronExpression("0 0/2 * 1/1 * ? *");
+      //ctFactory.setCronExpression("0 0/2 * 1/1 * ? *");
         ctFactory.setCronExpression("*/10 * * * * ?");
+      
         return ctFactory;
     }
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean() {
+    public SchedulerFactoryBean schedulerFactoryBean()
+    {
         SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
+        
         scheduler.setTriggers(cronTriggerFactoryBean().getObject());
+        
         return scheduler;
     }
 }

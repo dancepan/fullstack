@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.quartz.model.FxMarketPricesStore;
-import com.example.quartz.model.StockPriceDetails;
-import com.example.quartz.model.Trade;
+import com.example.quartz.etlprocess.FxMarketPricesStore;
+import com.example.quartz.etlprocess.StockPriceDetails;
+import com.example.quartz.etlprocess.Trade;
 
 /**
  * The Class StockPriceAggregator.

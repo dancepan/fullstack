@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.example.quartz.listener.JobCompletionNotificationListener;
-import com.example.quartz.model.FxMarketEvent;
-import com.example.quartz.model.FxMarketPricesStore;
-import com.example.quartz.model.Trade;
+import com.example.quartz.etlprocess.FxMarketEvent;
+import com.example.quartz.etlprocess.FxMarketPricesStore;
+import com.example.quartz.etlprocess.Trade;
 import com.example.quartz.step.ProcessorImpl;
 import com.example.quartz.step.ReaderImpl;
 import com.example.quartz.step.WriterImpl;
+import com.example.quartz.step.WriterListener;
 
 /**
  * 
@@ -64,9 +64,9 @@ public class BatchConfiguration
 
     // JobCompletionNotificationListener (File loader)
     @Bean
-    public JobExecutionListener jobCompleteListen()
+    public JobExecutionListener writerListenerBean()
     {
-        return new JobCompletionNotificationListener();
+        return new WriterListener();
     }
 
     // Configure job step
@@ -75,7 +75,7 @@ public class BatchConfiguration
     {
         return jobBuilderFactory.get("fxmarket_prices_etl_job")
                                 .incrementer(new RunIdIncrementer())
-                                .listener(jobCompleteListen())
+                                .listener(writerListenerBean())
                                 .flow(stepBean())
                                 .end()
                                 .build();

@@ -1,4 +1,4 @@
-package com.example.quartz.model;
+package com.example.quartz.etlprocess;
 
 import java.util.Collection;
 import java.util.HashMap;
