@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.tips.restapi.model.entity.FineDust;
 
 @Repository
-public interface FineDustRepository extends JpaRepository<FineDust, String> {
+public interface FineDustRepository extends JpaRepository<FineDust, String>
+{
     //List<Object> findAllUserDefine();
 }
