@@ -11,11 +11,14 @@ import org.springframework.batch.core.configuration.JobLocator;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import lombok.Data;
+
 /**
  * The Class QuartzJobLauncher.
  *
  * @author ashraf
  */
+@Data
 public class QuartzJob extends QuartzJobBean
 {
     private static final Logger log = LoggerFactory.getLogger(QuartzJob.class);
@@ -24,35 +27,35 @@ public class QuartzJob extends QuartzJobBean
     private JobLauncher jobLauncher;
     private JobLocator  jobLocator;
     
-    public String getJobName()
-    {
-        return jobName;
-    }
-    
-    public void setJobName(String jobName)
-    {
-        this.jobName = jobName;
-    }
-    
-    public JobLauncher getJobLauncher() 
-    {
-        return jobLauncher;
-    }
-    
-    public void setJobLauncher(JobLauncher jobLauncher) 
-    {
-        this.jobLauncher = jobLauncher;
-    }
-    
-    public JobLocator getJobLocator() 
-    {
-        return jobLocator;
-    }
-    
-    public void setJobLocator(JobLocator jobLocator) 
-    {
-        this.jobLocator = jobLocator;
-    }
+//    public String getJobName()
+//    {
+//        return jobName;
+//    }
+//    
+//    public void setJobName(String jobName)
+//    {
+//        this.jobName = jobName;
+//    }
+//    
+//    public JobLauncher getJobLauncher() 
+//    {
+//        return jobLauncher;
+//    }
+//    
+//    public void setJobLauncher(JobLauncher jobLauncher) 
+//    {
+//        this.jobLauncher = jobLauncher;
+//    }
+//    
+//    public JobLocator getJobLocator() 
+//    {
+//        return jobLocator;
+//    }
+//    
+//    public void setJobLocator(JobLocator jobLocator) 
+//    {
+//        this.jobLocator = jobLocator;
+//    }
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException

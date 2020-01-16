@@ -32,6 +32,8 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-batch'
 		compile             'org.postgresql:postgresql:42.0.0'
 	compile   'org.quartz-scheduler:quartz'
+		compileOnly         'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok:1.18.4'
 }
 
 test {
