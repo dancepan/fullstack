@@ -102,7 +102,7 @@ sap.ui.define([
                 "error"    :
                     function(x, o, e) 
                     {
-                        console.log(x.status + " : " + o + " : " + e);    
+                        console.log("error : " + x.status + " : " + o + " : " + e);    
                     }
             });
         }

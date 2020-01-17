@@ -11,6 +11,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TableOneJson
 {
+	private String id;
     private String returntype;
     private String cograde;
     private String covalue;

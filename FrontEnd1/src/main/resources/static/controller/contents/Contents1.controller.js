@@ -22,7 +22,7 @@ sap.ui.define([
             
             console.log(JSON.stringify(oModel, null, 2));
             
-            var oData = oModel.getProperty("/result/fineDustList");
+            var oData = oModel.getProperty("/result/list");
             
             console.log(JSON.stringify(oData, null, 2));
             
@@ -40,7 +40,7 @@ sap.ui.define([
         localApi : function()
         {
             var oParam = {
-                url     : "http://localhost:8081/finedustlist",
+                url     : "http://localhost:8081/list",
                 type    : "GET",
                 data    : "",
                 callback: "callbackFunction",
@@ -85,6 +85,8 @@ sap.ui.define([
                        + "&" + "ver="          + version
                        + "&" +  "_returnType=" + returnType;
           
+            console.log(oParam.url);
+            
             this.callAjax2(oParam);
         }
     });

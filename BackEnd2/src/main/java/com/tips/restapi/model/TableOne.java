@@ -18,7 +18,7 @@ public class TableOne implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
     
     @Column private String returntype;
     @Column private String cograde;
