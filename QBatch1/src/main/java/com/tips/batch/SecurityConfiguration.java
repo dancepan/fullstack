@@ -10,10 +10,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter
+{
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception
+	{
 		CorsConfiguration config = new CorsConfiguration();
 		
 		config.addAllowedOrigin(CorsConfiguration.ALL);

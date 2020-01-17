@@ -3,14 +3,16 @@ package com.tips.batch;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableScheduling
 @SpringBootApplication
 @EnableBatchProcessing
-public class BatchApplication
+public class QBatch1Application
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(BatchApplication.class, args);
+		SpringApplication.run(QBatch1Application.class, args);
 	}
 }

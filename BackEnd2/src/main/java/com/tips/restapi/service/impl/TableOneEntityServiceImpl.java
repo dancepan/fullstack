@@ -31,49 +31,49 @@ public class TableOneEntityServiceImpl implements TableOneEntityService
         // Retune value
         ArrayList <TableOneJson> TableOneJsonList = new ArrayList<TableOneJson>();
         
-        List<TableOne> TableOneAllByJPA = this.TableOneRepository.findAll();
+        List<TableOne> tableOneAllByJPA = this.TableOneRepository.findAll();
         
         // JPA return value
-        for(TableOne TableOneEntity : TableOneAllByJPA)  
+        for(TableOne tableOneEntity : tableOneAllByJPA)  
         {
-            TableOneJson TableOneJsonObj = new TableOneJson();
+            TableOneJson tableOneJsonObj = new TableOneJson();
             
-            TableOneJsonObj.setId            (TableOneEntity.getId         ());
-            TableOneJsonObj.setReturntype    (TableOneEntity.getDatatime   ());
-            TableOneJsonObj.setCograde       (TableOneEntity.getCograde    ());
-            TableOneJsonObj.setCovalue       (TableOneEntity.getCovalue    ());
-            TableOneJsonObj.setDataterm      (TableOneEntity.getDataterm   ());
-            TableOneJsonObj.setDatatime      (TableOneEntity.getDatatime   ());
-            TableOneJsonObj.setKhaigrade     (TableOneEntity.getKhaigrade  ());
-            TableOneJsonObj.setKhaivalue     (TableOneEntity.getKhaivalue  ());
-            TableOneJsonObj.setMangname      (TableOneEntity.getMangname   ());
-            TableOneJsonObj.setNo2grade      (TableOneEntity.getNo2grade   ());
-            TableOneJsonObj.setNo2value      (TableOneEntity.getNo2value   ());
-            TableOneJsonObj.setNumofrows     (TableOneEntity.getNumofrows  ());
-            TableOneJsonObj.setO3grade       (TableOneEntity.getO3grade    ());
-            TableOneJsonObj.setO3value       (TableOneEntity.getO3value    ());
-            TableOneJsonObj.setPageno        (TableOneEntity.getPageno     ());
-            TableOneJsonObj.setPm10grade     (TableOneEntity.getPm10grade  ());
-            TableOneJsonObj.setPm10grade1h   (TableOneEntity.getPm10grade1h());
-            TableOneJsonObj.setPm10value     (TableOneEntity.getPm10value  ());
-            TableOneJsonObj.setPm10value24   (TableOneEntity.getPm10value24());
-            TableOneJsonObj.setPm25grade     (TableOneEntity.getPm25grade  ());
-            TableOneJsonObj.setPm25grade1h   (TableOneEntity.getPm25grade1h());
-            TableOneJsonObj.setPm25value     (TableOneEntity.getPm25value  ());
-            TableOneJsonObj.setPm25value24   (TableOneEntity.getPm25value24());
-            TableOneJsonObj.setResultcode    (TableOneEntity.getResultcode ());
-            TableOneJsonObj.setResultmsg     (TableOneEntity.getResultmsg  ());
-            TableOneJsonObj.setRnum          (TableOneEntity.getRnum       ());
-            TableOneJsonObj.setServicekey    (TableOneEntity.getServicekey ());
-            TableOneJsonObj.setSidoname      (TableOneEntity.getSidoname   ());
-            TableOneJsonObj.setSo2grade      (TableOneEntity.getSo2grade   ());
-            TableOneJsonObj.setSo2value      (TableOneEntity.getSo2value   ());
-            TableOneJsonObj.setStationcode   (TableOneEntity.getStationcode());
-            TableOneJsonObj.setStationname   (TableOneEntity.getStationname());
-            TableOneJsonObj.setTotalcount    (TableOneEntity.getTotalcount ());
-            TableOneJsonObj.setVer           (TableOneEntity.getVer        ());
+            tableOneJsonObj.setId            (tableOneEntity.getId         ());
+            tableOneJsonObj.setReturntype    (tableOneEntity.getDatatime   ());
+            tableOneJsonObj.setCograde       (tableOneEntity.getCograde    ());
+            tableOneJsonObj.setCovalue       (tableOneEntity.getCovalue    ());
+            tableOneJsonObj.setDataterm      (tableOneEntity.getDataterm   ());
+            tableOneJsonObj.setDatatime      (tableOneEntity.getDatatime   ());
+            tableOneJsonObj.setKhaigrade     (tableOneEntity.getKhaigrade  ());
+            tableOneJsonObj.setKhaivalue     (tableOneEntity.getKhaivalue  ());
+            tableOneJsonObj.setMangname      (tableOneEntity.getMangname   ());
+            tableOneJsonObj.setNo2grade      (tableOneEntity.getNo2grade   ());
+            tableOneJsonObj.setNo2value      (tableOneEntity.getNo2value   ());
+            tableOneJsonObj.setNumofrows     (tableOneEntity.getNumofrows  ());
+            tableOneJsonObj.setO3grade       (tableOneEntity.getO3grade    ());
+            tableOneJsonObj.setO3value       (tableOneEntity.getO3value    ());
+            tableOneJsonObj.setPageno        (tableOneEntity.getPageno     ());
+            tableOneJsonObj.setPm10grade     (tableOneEntity.getPm10grade  ());
+            tableOneJsonObj.setPm10grade1h   (tableOneEntity.getPm10grade1h());
+            tableOneJsonObj.setPm10value     (tableOneEntity.getPm10value  ());
+            tableOneJsonObj.setPm10value24   (tableOneEntity.getPm10value24());
+            tableOneJsonObj.setPm25grade     (tableOneEntity.getPm25grade  ());
+            tableOneJsonObj.setPm25grade1h   (tableOneEntity.getPm25grade1h());
+            tableOneJsonObj.setPm25value     (tableOneEntity.getPm25value  ());
+            tableOneJsonObj.setPm25value24   (tableOneEntity.getPm25value24());
+            tableOneJsonObj.setResultcode    (tableOneEntity.getResultcode ());
+            tableOneJsonObj.setResultmsg     (tableOneEntity.getResultmsg  ());
+            tableOneJsonObj.setRnum          (tableOneEntity.getRnum       ());
+            tableOneJsonObj.setServicekey    (tableOneEntity.getServicekey ());
+            tableOneJsonObj.setSidoname      (tableOneEntity.getSidoname   ());
+            tableOneJsonObj.setSo2grade      (tableOneEntity.getSo2grade   ());
+            tableOneJsonObj.setSo2value      (tableOneEntity.getSo2value   ());
+            tableOneJsonObj.setStationcode   (tableOneEntity.getStationcode());
+            tableOneJsonObj.setStationname   (tableOneEntity.getStationname());
+            tableOneJsonObj.setTotalcount    (tableOneEntity.getTotalcount ());
+            tableOneJsonObj.setVer           (tableOneEntity.getVer        ());
             
-            TableOneJsonList.add(TableOneJsonObj);
+            TableOneJsonList.add(tableOneJsonObj);
         }
           
         TableOneJson.setTableOneList(TableOneJsonList);

@@ -4,18 +4,15 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.tips.batch.entity.FineDust;
-import com.tips.batch.entity.FineDustStageMock;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tips.batch.model.TableOne;
+import com.tips.batch.model.json.ReaderItemJson;
+import com.tips.batch.model.json.ReaderItemJson;
+
 @Transactional(isolation = Isolation.READ_COMMITTED)
 @Repository
-public interface FineDustStageMokeRepository extends JpaRepository<FineDustStageMock, Integer>
+public interface TableOneRepository extends JpaRepository<TableOne, String>
 {
-
-    //public void saveAll(List<FineDustStageMock> fineDustStageMock);
-    //public <S> S save(FineDustStageMock fineDustStageMock);
-
 }

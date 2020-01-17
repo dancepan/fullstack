@@ -1,4 +1,4 @@
-package com.tips.restapi.model;
+package com.tips.batch.model;
 
 import lombok.Data;
 
@@ -17,7 +17,9 @@ import javax.persistence.Id;
 public class TableOne implements Serializable
 {
     @Id
-    @Column private String id;    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    
     @Column private String returntype;
     @Column private String cograde;
     @Column private String covalue;

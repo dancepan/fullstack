@@ -4,8 +4,6 @@ import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 
-import com.tips.batch.step.ReaderLocApi;
-
 public class JobCompletionListener extends JobExecutionListenerSupport
 {
     @Override
