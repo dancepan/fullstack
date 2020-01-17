@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tips.restapi.common.RestResponseEntity;
 import com.tips.restapi.model.entity.FineDust;
 import com.tips.restapi.model.json.FineDustJson;
+import com.tips.restapi.model.json.FineDustStageJson;
 import com.tips.restapi.repository.FineDustRepository;
 import com.tips.restapi.service.FineDustService;
+import com.tips.restapi.service.FineDustServicePub;
 
 @RestController
 @RequestMapping("/")
-public class FineDustController {
+public class WeatherController {
  
 //    @Autowired
 //    FineDustRepository fineDustRepository;
@@ -51,14 +53,27 @@ public class FineDustController {
 //    }
 
     @Autowired
-    private FineDustService fineDustService;
+    private FineDustService    fineDustService;
 
+    @Autowired
+    private FineDustServicePub fineDustServicePub;
+    
     @GetMapping("/finedustlist")
     public RestResponseEntity<FineDustJson> findFineDustList()
     {
         RestResponseEntity<FineDustJson> result = null;
         
         result = new RestResponseEntity<FineDustJson>(this.fineDustService.findFineDustJson());
+        
+        return result;
+    }
+    
+    @GetMapping("/pubfinedustlist")
+    public FineDustStageJson findFineDustStageJson()
+    {
+        FineDustStageJson result = null;
+        
+        result = this.fineDustServicePub.findFineDustStageJson();
         
         return result;
     }
