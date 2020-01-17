@@ -251,7 +251,7 @@ public class ReaderPubApiMock implements ItemReader<List<FineDust>>
         List<FineDust> arr = new ArrayList<FineDust>();
         FineDust fineDust = new FineDust();
         
-        fineDust.set_returnType("0"); //": "json",
+        fineDust.setReturnType("0"); //": "json",
         fineDust.setCoGrade    ("0"); //": "1",
         fineDust.setCoValue    ("0"); //": "0.8",
         fineDust.setDataTerm   ("0"); //": "",

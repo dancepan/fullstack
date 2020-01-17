@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table
+@Table(name = "FINE_DUST_STAGE_MOCK")
 public class FineDustStageMock implements Serializable {
 //    //private String 계약월;
 //    private String 거래금액;
@@ -30,10 +32,12 @@ public class FineDustStageMock implements Serializable {
 
 
 
-
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private int id;
+    
     @Column
-    private String _returnType; //": "json",
+    private String returnType; //": "json",
     
     @Column 
     private String coGrade    ; //": "1",

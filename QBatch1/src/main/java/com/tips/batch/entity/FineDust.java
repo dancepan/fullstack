@@ -23,7 +23,7 @@ public class FineDust implements Serializable {
 //    private String 지역코드;
 //    private String 층;
 
-    private String _returnType; //": "json",
+    private String returnType; //": "json",
     private String coGrade    ; //": "1",
     private String coValue    ; //": "0.8",
     private String dataTerm   ; //": "",

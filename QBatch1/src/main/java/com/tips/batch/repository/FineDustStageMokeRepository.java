@@ -12,9 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(isolation = Isolation.READ_COMMITTED)
 @Repository
-public interface FineDustStageMokeRepository extends JpaRepository<FineDustStageMock, String>
+public interface FineDustStageMokeRepository extends JpaRepository<FineDustStageMock, Integer>
 {
 
-    public void saveAll(List<FineDustStageMock> fineDustStageMock);
+    //public void saveAll(List<FineDustStageMock> fineDustStageMock);
+    //public <S> S save(FineDustStageMock fineDustStageMock);
 
 }
