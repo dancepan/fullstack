@@ -21,6 +21,14 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		    oRouter.navTo("contents2");
 		    
+		},
+		
+		onNavToContent3 : function(oEvent) {
+			console.log("Left.js onNavToContent3 Clicked");
+
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+		    oRouter.navTo("contents3");
+		    
 		}
 	});
 }, true);
