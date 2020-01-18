@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.quartz.etlprocess.FxMarketPricesStore;
 import com.example.quartz.etlprocess.StockPriceDetails;
-import com.example.quartz.etlprocess.Trade;
+import com.example.quartz.model.TradeDTO;
 
 /**
  * The Class StockPriceAggregator.
  * 
  * @author ashraf
  */
-public class WriterImpl implements ItemWriter<Trade>
+public class WriterImpl implements ItemWriter<TradeDTO>
 {
     @Autowired
     private FxMarketPricesStore fxMarketPricesStore;
@@ -24,8 +24,12 @@ public class WriterImpl implements ItemWriter<Trade>
     private static final Logger log = LoggerFactory.getLogger(WriterImpl.class);
 
     @Override
-    public void write(List<? extends Trade> trades) throws Exception
+    public void write(List<? extends TradeDTO> trades) throws Exception
     {
+
+        
+
+        
         trades.forEach(t -> {
             if (fxMarketPricesStore.containsKey(t.getStock())) 
             {
@@ -47,10 +51,14 @@ public class WriterImpl implements ItemWriter<Trade>
                 
                 // Set close price
                 priceDetails.setClose(tradePrice);
+                
+                log.info("Adding 111111 new stock {}", t.getStock());
+                fxMarketPricesStore.put(t.getStock(),
+                        new StockPriceDetails(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
             }
             else
             {
-                log.trace("Adding new stock {}", t.getStock());
+                log.info("Adding 2222222222 new stock {}", t.getStock());
                 
                 fxMarketPricesStore.put(t.getStock(),
                         new StockPriceDetails(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));

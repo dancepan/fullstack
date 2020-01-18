@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot'        version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'com.example.qbatch6'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    developmentOnly
+    
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            'org.apache.commons:commons-lang3:3.4',
+            'org.springframework.boot:spring-boot-starter-batch',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework:spring-oxm',
+            'org.springframework.batch:spring-batch-excel:0.5.0-SNAPSHOT',
+            'org.apache.poi:poi:3.11',
+            'org.apache.poi:poi-ooxml:3.11',
+            'com.github.deanwong:spring-batch-excel:0.5.5'
+    )
+    runtime(
+            'org.liquibase:liquibase-core',
+            'com.h2database:h2'
+    )
+}

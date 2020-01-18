@@ -1,5 +1,7 @@
 package com.example.quartz.config;
 
+import java.util.List;
+
 import org.quartz.spi.JobFactory;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.batch.core.Job;
@@ -16,9 +18,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
-import com.example.quartz.etlprocess.FxMarketEvent;
 import com.example.quartz.etlprocess.FxMarketPricesStore;
-import com.example.quartz.etlprocess.Trade;
+import com.example.quartz.model.MarketEventDTO;
+import com.example.quartz.model.TradeDTO;
 import com.example.quartz.step.ProcessorImpl;
 import com.example.quartz.step.ReaderImpl;
 import com.example.quartz.step.WriterImpl;
@@ -77,10 +79,10 @@ public class BatchConfiguration
     @Bean
     public Job jobBean()
     {
-        return jobBuilderFactory.get("fxmarket_prices_etl_job")
-                                .incrementer(new RunIdIncrementer())
-                                .listener(writerListenerBean())
-                                .flow(stepBean())
+        return jobBuilderFactory.get("[Job] MarketEventETLJob")          // Share Quartz Configuration
+                                .incrementer(new RunIdIncrementer())  // Automatically parameter increase
+                                .listener   (writerListenerBean())    // Must be Bean
+                                .flow       (stepBean())
                                 .end()
                                 .build();
     }
@@ -91,26 +93,12 @@ public class BatchConfiguration
         // The job is thus scheduled to run every 2 minute. In fact it should
         // be successful on the first attempt, so the second and subsequent
         // attempts should through a JobInstanceAlreadyCompleteException, so you have to set allowStartIfComplete to true
-        return stepBuilderFactory.get("Extract -> Transform -> Aggregate -> Load")
-                                 .allowStartIfComplete(true)
-                                 .<FxMarketEvent, Trade> chunk(10000)
+        return stepBuilderFactory.get("[Step] MarketEventETLStep")
+                                 .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
+                                 .<MarketEventDTO, TradeDTO> chunk(10000)  // First:Reader return type. Second:Writer receive type
                                  .reader   (readerBean   ())
                                  .processor(processorBean())
                                  .writer   (writerBean   ())
                                  .build();
     }
-    
-    // 새로 추가할 필요가..
-//    @Bean public JobFactory jobFactory(AutowireCapableBeanFactory beanFactory) 
-//    {
-//    	return new SpringBeanJobFactory()
-//    	{ 
-//    		@Override protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception 
-//    		{ 
-//    			Object job = super.createJobInstance(bundle); 
-//    			beanFactory.autowireBean(job); 
-//    			return job; 
-//    		} 
-//    	}; 
-//    }
 }
