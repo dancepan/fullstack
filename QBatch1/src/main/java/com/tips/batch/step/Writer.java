@@ -15,6 +15,7 @@ import com.tips.batch.service.TableOneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 @Configuration
 public class Writer implements ItemWriter<List<TableOne>>
 {

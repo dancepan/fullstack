@@ -61,47 +61,62 @@ public class ReaderLocalApi implements ItemReader<List<ReaderItemJson>>
     {
     	List<ReaderItemJson> readerItemJsonList = new ArrayList<ReaderItemJson>();
     	
+    	JsonNode item = null;
+    	
         try
         {
-            StringBuilder urlBuilder = new StringBuilder("http://localhost:8081/list");
+//            StringBuilder urlBuilder = new StringBuilder("http://localhost:8081/list");
+//            
+//            URL url = new URL(urlBuilder.toString());
+//            
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            
+//            conn.setRequestMethod("GET");
+//            conn.setRequestProperty("Content-type", "application/json");
+//            
+//            BufferedReader rd;
+//            
+//            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300)
+//            {
+//                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//            }
+//            else
+//            {
+//                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+//            }
+//            
+//            ObjectMapper mapper = new ObjectMapper();
+//            
+//            JsonNode root = mapper.readTree(rd);
+//            
+//            logger.error("[root] : " + root.toString());
+//            
+//            JsonNode item = null;
+//            
+//            item = root.path("result").get("list");
+//            
+//            logger.error("[item] : " + item.toString());
+//            
+//            readerItemJsonList = new ObjectMapper().readerFor(new TypeReference<ArrayList<ReaderItemJson>>() {}).readValue(item);
+//            
+//            logger.error("[readerItemJsonList] : " + readerItemJsonList.toString());
+//            
+//            rd.close();
+//            
+//            conn.disconnect();
             
-            URL url = new URL(urlBuilder.toString());
-            
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-type", "application/json");
-            
-            BufferedReader rd;
-            
-            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300)
-            {
-                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            }
-            else
-            {
-                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            }
-            
+        	URI uri = new URI("http://localhost:8081/list");
+        	
+        	ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+        	
             ObjectMapper mapper = new ObjectMapper();
-            
-            JsonNode root = mapper.readTree(rd);
-            
-            logger.error("[root] : " + root.toString());
-            
-            JsonNode item = null;
+            JsonNode root = mapper.readTree(response.getBody());
             
             item = root.path("result").get("list");
             
-            logger.error("[item] : " + item.toString());
-            
-            readerItemJsonList = new ObjectMapper().readerFor(new TypeReference<ArrayList<ReaderItemJson>>() {}).readValue(item);
-            
-            logger.error("[readerItemJsonList] : " + readerItemJsonList.toString());
-            
-            rd.close();
-            
-            conn.disconnect();
+        	readerItemJsonList = new ObjectMapper().readerFor(new TypeReference<ArrayList<ReaderItemJson>>() {}).readValue(item);
+
+
             
             // Write
 //            List<TableOne> tableOneList = new ArrayList<TableOne>();

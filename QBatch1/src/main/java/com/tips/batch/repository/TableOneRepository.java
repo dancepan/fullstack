@@ -11,7 +11,8 @@ import com.tips.batch.model.TableOne;
 import com.tips.batch.model.json.ReaderItemJson;
 import com.tips.batch.model.json.ReaderItemJson;
 
-@Transactional(isolation = Isolation.READ_COMMITTED)
+
+@Transactional
 @Repository
 public interface TableOneRepository extends JpaRepository<TableOne, String>
 {
