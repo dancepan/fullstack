@@ -1,5 +1,6 @@
 package com.example.quartz.bean.writer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +9,10 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.quartz.model.ProcessorReceiveDTO;
+import com.example.quartz.model.entity.BatchTarget;
+import com.example.quartz.repository.BatchTargetRepository;
+import com.example.quartz.service.BatchTargetService;
+
 import com.example.quartz.model.BizVO;
 import com.example.quartz.model.FileWriteDTO;
 
@@ -18,16 +23,20 @@ import com.example.quartz.model.FileWriteDTO;
  */
 public class WriterImpl implements ItemWriter<ProcessorReceiveDTO>
 {
+	private static final Logger log = LoggerFactory.getLogger(WriterImpl.class);
+	
     @Autowired
     private BizVO bizVO;
 
-    private static final Logger log = LoggerFactory.getLogger(WriterImpl.class);
+    BatchTargetService batchTargetService;
+    BatchTargetRepository batchTargetRepository;
 
     @Override
     public void write(List<? extends ProcessorReceiveDTO> trades) throws Exception
     {
     	log.info("[WriterImpl] write() trades : " + trades.toString());
     	
+        // Transfer to VO
         trades.forEach(t ->
         {
             if (bizVO.containsKey(t.getStock())) 

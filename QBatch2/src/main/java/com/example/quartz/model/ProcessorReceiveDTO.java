@@ -1,7 +1,11 @@
 package com.example.quartz.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The Class Trade.

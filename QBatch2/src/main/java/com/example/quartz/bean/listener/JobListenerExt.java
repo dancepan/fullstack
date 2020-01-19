@@ -5,17 +5,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.quartz.model.BizVO;
 import com.example.quartz.model.FileWriteDTO;
+import com.example.quartz.model.entity.BatchTarget;
+import com.example.quartz.repository.BatchTargetRepository;
+import com.example.quartz.service.BatchTargetService;
 
 public class JobListenerExt extends JobExecutionListenerSupport
 {
@@ -23,6 +29,11 @@ public class JobListenerExt extends JobExecutionListenerSupport
     private static final String HEADER    = "stock,open,close,low,high";
     private static final String LINE_DILM = ",";
 
+    BatchTargetService    batchTargetService   ;
+    BatchTargetRepository batchTargetRepository;
+    
+    JdbcBatchItemWriter<BatchTarget> databaseItemWriter = new JdbcBatchItemWriter<>();
+    
     @Autowired
     private BizVO bizVO;
 

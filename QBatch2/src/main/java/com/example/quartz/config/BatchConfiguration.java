@@ -19,11 +19,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 import com.example.quartz.model.ReaderReturnDTO;
+import com.example.quartz.model.entity.BatchTarget;
 import com.example.quartz.bean.listener.JobListenerExt;
 import com.example.quartz.bean.processor.ProcessorImpl;
 import com.example.quartz.bean.reader.ReaderExt;
 import com.example.quartz.bean.reader.ReaderImpl;
 import com.example.quartz.bean.writer.WriterImpl;
+import com.example.quartz.bean.writer.WriterJpaImpl;
 import com.example.quartz.model.BizVO;
 import com.example.quartz.model.ProcessorReceiveDTO;
 
@@ -41,13 +43,17 @@ public class BatchConfiguration
 
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
-
+    
     @Bean
     public BizVO fxMarketPricesStore()
     {
         return new BizVO();
     }
 
+    public WriterJpaImpl setupOverallWriter() {
+        return new WriterJpaImpl();
+    }
+    
     // FxMarketEventReader (Reader)
     @Bean
     public ReaderExt readerBean()
@@ -82,7 +88,7 @@ public class BatchConfiguration
     {
         return jobBuilderFactory.get("MarketEventETLJob")          // Share Quartz Configuration
                                 .incrementer(new RunIdIncrementer())  // Automatically parameter increase
-                                .listener   (jobListen())    // Must be Bean
+                              //.listener   (jobListen())    // Must be Bean
                                 .flow       (stepBean())
                                 .end()
                                 .build();
@@ -100,7 +106,8 @@ public class BatchConfiguration
                                //.reader   (readerBean   ())
                                  .reader   (new ReaderImpl   ())
                                  .processor(processorBean())
-                                 .writer   (writerBean   ())
+                               //.writer   (writerBean   ())
+                                 .writer   (new WriterJpaImpl())
                                  .build();
     }
 }

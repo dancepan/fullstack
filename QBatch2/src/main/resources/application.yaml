@@ -13,7 +13,7 @@ spring:
     password: tipsuser
   jpa:
     hibernate:
-      ddl-auto: auto
+      ddl-auto: update
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
