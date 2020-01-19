@@ -34,7 +34,10 @@ dependencies {
             'org.springframework.batch:spring-batch-excel:0.5.0-SNAPSHOT',
             'org.apache.poi:poi:3.11',
             'org.apache.poi:poi-ooxml:3.11',
-            'com.github.deanwong:spring-batch-excel:0.5.5'
+            'com.github.deanwong:spring-batch-excel:0.5.5',
+            'org.springframework.boot:spring-boot-devtools',
+            'com.github.kumarpankaj18:spring-batch-excel:1.0.6',
+            'org.postgresql:postgresql:42.0.0'
     )
     runtime(
             'org.liquibase:liquibase-core',
