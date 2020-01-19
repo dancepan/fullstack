@@ -103,11 +103,11 @@ public class BatchConfiguration
         return stepBuilderFactory.get("MarketEventETLStep")
                                  .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
                                  .<ReaderReturnDTO, ProcessorReceiveDTO> chunk(1000)  // First:Reader return type. Second:Writer receive type
-                               //.reader   (readerBean   ())
-                                 .reader   (new ReaderImpl   ())
-                                 .processor(processorBean())
-                               //.writer   (writerBean   ())
-                                 .writer   (new WriterDBImpl())
+                                 .reader   (    readerBean   ())
+                               //.reader   (new ReaderImpl   ())
+                                 .processor(    processorBean())
+                               //.writer   (    writerBean   ())
+                                 .writer   (new WriterDBImpl ())
                                  .build();
     }
 }

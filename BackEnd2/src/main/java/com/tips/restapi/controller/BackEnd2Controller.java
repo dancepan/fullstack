@@ -22,13 +22,13 @@ import com.tips.restapi.service.TableOneEntityService;
 
 @RestController
 @RequestMapping("/")
-public class BackEndController
+public class BackEnd2Controller
 {
     @Autowired
     private TableOneEntityService tableOneEntityService;
     
     @GetMapping("/list")
-    public RestResponseEntity<TableOneJson> findFineDustList()
+    public RestResponseEntity<TableOneJson> findTableOneAll()
     {
         RestResponseEntity<TableOneJson> result = null;
         
