@@ -1,4 +1,4 @@
-package com.example.quartz.step;
+package com.example.quartz.bean.reader;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ import com.example.quartz.model.ReaderReturnDTO;
  *
  * @author ashraf
  */
-public class ReaderImpl extends FlatFileItemReader<ReaderReturnDTO>
+public class ReaderExt extends FlatFileItemReader<ReaderReturnDTO>
 {
-	private static final Logger log = LoggerFactory.getLogger(ReaderImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(ReaderExt.class);
 	
-    public ReaderImpl()
+    public ReaderExt()
     {
     	log.info("[ReaderImpl] ReaderImpl()");
     	

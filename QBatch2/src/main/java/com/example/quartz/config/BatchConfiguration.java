@@ -19,13 +19,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 import com.example.quartz.model.ReaderReturnDTO;
+import com.example.quartz.bean.listener.JobListenerExt;
+import com.example.quartz.bean.processor.ProcessorImpl;
+import com.example.quartz.bean.reader.ReaderExt;
+import com.example.quartz.bean.reader.ReaderImpl;
+import com.example.quartz.bean.writer.WriterImpl;
 import com.example.quartz.model.BizVO;
 import com.example.quartz.model.ProcessorReceiveDTO;
-import com.example.quartz.step.ProcessorImpl;
-import com.example.quartz.step.ReaderImpl;
-import com.example.quartz.step.ReaderImpl2;
-import com.example.quartz.step.WriterImpl;
-import com.example.quartz.step.JobListener;
 
 /**
  * 
@@ -50,9 +50,9 @@ public class BatchConfiguration
 
     // FxMarketEventReader (Reader)
     @Bean
-    public ReaderImpl readerBean()
+    public ReaderExt readerBean()
     {
-        return new ReaderImpl();
+        return new ReaderExt();
     }
 
     // FxMarketEventProcessor (Processor)
@@ -73,7 +73,7 @@ public class BatchConfiguration
     @Bean
     public JobExecutionListener jobListen()
     {
-        return new JobListener();
+        return new JobListenerExt();
     }
 
     // Configure job step
@@ -98,7 +98,7 @@ public class BatchConfiguration
                                  .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
                                  .<ReaderReturnDTO, ProcessorReceiveDTO> chunk(1000)  // First:Reader return type. Second:Writer receive type
                                //.reader   (readerBean   ())
-                                 .reader   (new ReaderImpl2   ())
+                                 .reader   (new ReaderImpl   ())
                                  .processor(processorBean())
                                  .writer   (writerBean   ())
                                  .build();

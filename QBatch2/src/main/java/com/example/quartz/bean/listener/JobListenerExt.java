@@ -1,4 +1,4 @@
-package com.example.quartz.step;
+package com.example.quartz.bean.listener;
 
 import java.io.BufferedWriter;
 import java.nio.file.Files;
@@ -17,9 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.quartz.model.BizVO;
 import com.example.quartz.model.FileWriteDTO;
 
-public class JobListener extends JobExecutionListenerSupport
+public class JobListenerExt extends JobExecutionListenerSupport
 {
-    private static final Logger log       = LoggerFactory.getLogger(JobListener.class);
+    private static final Logger log       = LoggerFactory.getLogger(JobListenerExt.class);
     private static final String HEADER    = "stock,open,close,low,high";
     private static final String LINE_DILM = ",";
 
