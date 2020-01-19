@@ -23,6 +23,7 @@ import com.example.quartz.model.BizVO;
 import com.example.quartz.model.ProcessorReceiveDTO;
 import com.example.quartz.step.ProcessorImpl;
 import com.example.quartz.step.ReaderImpl;
+import com.example.quartz.step.ReaderImpl2;
 import com.example.quartz.step.WriterImpl;
 import com.example.quartz.step.JobListener;
 
@@ -96,7 +97,8 @@ public class BatchConfiguration
         return stepBuilderFactory.get("MarketEventETLStep")
                                  .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
                                  .<ReaderReturnDTO, ProcessorReceiveDTO> chunk(1000)  // First:Reader return type. Second:Writer receive type
-                                 .reader   (readerBean   ())
+                               //.reader   (readerBean   ())
+                                 .reader   (new ReaderImpl2   ())
                                  .processor(processorBean())
                                  .writer   (writerBean   ())
                                  .build();
