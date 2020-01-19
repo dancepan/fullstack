@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author ashraf
  */
 @SpringBootApplication
-public class QuartzApplication
+public class QBatch2Application
 {
     public static void main(String[] args) throws Exception
     {
-        SpringApplication.run(QuartzApplication.class, args);
+        SpringApplication.run(QBatch2Application.class, args);
     }
 }

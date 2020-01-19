@@ -27,36 +27,6 @@ public class QuartzJob extends QuartzJobBean
     private JobLauncher jobLauncher;
     private JobLocator  jobLocator;
     
-//    public String getJobName()
-//    {
-//        return jobName;
-//    }
-//    
-//    public void setJobName(String jobName)
-//    {
-//        this.jobName = jobName;
-//    }
-//    
-//    public JobLauncher getJobLauncher() 
-//    {
-//        return jobLauncher;
-//    }
-//    
-//    public void setJobLauncher(JobLauncher jobLauncher) 
-//    {
-//        this.jobLauncher = jobLauncher;
-//    }
-//    
-//    public JobLocator getJobLocator() 
-//    {
-//        return jobLocator;
-//    }
-//    
-//    public void setJobLocator(JobLocator jobLocator) 
-//    {
-//        this.jobLocator = jobLocator;
-//    }
-
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException
     {
@@ -66,11 +36,11 @@ public class QuartzJob extends QuartzJobBean
             
             JobExecution jobExecution = jobLauncher.run(job, new JobParameters());
             
-            log.info("{}_{} was completed successfully", job.getName(), jobExecution.getId());
+            log.info("[QuartzJob] executeInternal() : {}(JobId:{}) was completed successfully", job.getName(), jobExecution.getId());
         } 
         catch (Exception e) 
         {
-            log.error("Encountered job execution exception!" + e.toString());
+            log.info("[QuartzJob] executeInternal() Encountered job execution exception!" + e.toString());
         }
     }
 }

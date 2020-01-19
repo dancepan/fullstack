@@ -1,4 +1,4 @@
-package com.example.quartz.etlprocess;
+package com.example.quartz.model;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,26 +9,26 @@ import java.util.Map;
  *
  * @author ashraf
  */
-public class FxMarketPricesStore
+public class BizVO
 {
-    private Map<String, StockPriceDetails> stockPrices = new HashMap<String, StockPriceDetails>();
+    private Map<String, FileWriteDTO> stockPrices = new HashMap<String, FileWriteDTO>();
 
     public boolean containsKey(Object key)
     {
         return stockPrices.containsKey(key);
     }
 
-    public StockPriceDetails put(String key, StockPriceDetails value)
+    public FileWriteDTO put(String key, FileWriteDTO value)
     {
         return stockPrices.put(key, value);
     }
 
-    public Collection<StockPriceDetails> values()
+    public Collection<FileWriteDTO> values()
     {
         return stockPrices.values();
     }
 
-    public StockPriceDetails get(Object key)
+    public FileWriteDTO get(Object key)
     {
         return stockPrices.get(key);
     }

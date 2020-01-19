@@ -7,35 +7,34 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.quartz.etlprocess.FxMarketPricesStore;
-import com.example.quartz.etlprocess.StockPriceDetails;
-import com.example.quartz.model.TradeDTO;
+import com.example.quartz.model.ProcessorReceiveDTO;
+import com.example.quartz.model.BizVO;
+import com.example.quartz.model.FileWriteDTO;
 
 /**
  * The Class StockPriceAggregator.
  * 
  * @author ashraf
  */
-public class WriterImpl implements ItemWriter<TradeDTO>
+public class WriterImpl implements ItemWriter<ProcessorReceiveDTO>
 {
     @Autowired
-    private FxMarketPricesStore fxMarketPricesStore;
+    private BizVO bizVO;
 
     private static final Logger log = LoggerFactory.getLogger(WriterImpl.class);
 
     @Override
-    public void write(List<? extends TradeDTO> trades) throws Exception
+    public void write(List<? extends ProcessorReceiveDTO> trades) throws Exception
     {
-
-        
-
-        
-        trades.forEach(t -> {
-            if (fxMarketPricesStore.containsKey(t.getStock())) 
+    	log.info("[WriterImpl] write() trades : " + trades.toString());
+    	
+        trades.forEach(t ->
+        {
+            if (bizVO.containsKey(t.getStock())) 
             {
                 double tradePrice = t.getPrice();
                 
-                StockPriceDetails priceDetails = fxMarketPricesStore.get(t.getStock());
+                FileWriteDTO priceDetails = bizVO.get(t.getStock());
                 
                 // Set highest price
                 if (tradePrice > priceDetails.getHigh())
@@ -52,16 +51,13 @@ public class WriterImpl implements ItemWriter<TradeDTO>
                 // Set close price
                 priceDetails.setClose(tradePrice);
                 
-                log.info("Adding 111111 new stock {}", t.getStock());
-                fxMarketPricesStore.put(t.getStock(),
-                        new StockPriceDetails(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
+                bizVO.put(t.getStock(), 
+                    new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
             }
             else
             {
-                log.info("Adding 2222222222 new stock {}", t.getStock());
-                
-                fxMarketPricesStore.put(t.getStock(),
-                        new StockPriceDetails(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
+            	bizVO.put(t.getStock(),
+                    new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
             }
         });
     }

@@ -18,13 +18,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
-import com.example.quartz.etlprocess.FxMarketPricesStore;
-import com.example.quartz.model.MarketEventDTO;
-import com.example.quartz.model.TradeDTO;
+import com.example.quartz.model.ReaderReturnDTO;
+import com.example.quartz.model.BizVO;
+import com.example.quartz.model.ProcessorReceiveDTO;
 import com.example.quartz.step.ProcessorImpl;
 import com.example.quartz.step.ReaderImpl;
 import com.example.quartz.step.WriterImpl;
-import com.example.quartz.step.WriterListener;
+import com.example.quartz.step.JobListener;
 
 /**
  * 
@@ -42,9 +42,9 @@ public class BatchConfiguration
     public StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public FxMarketPricesStore fxMarketPricesStore()
+    public BizVO fxMarketPricesStore()
     {
-        return new FxMarketPricesStore();
+        return new BizVO();
     }
 
     // FxMarketEventReader (Reader)
@@ -70,18 +70,18 @@ public class BatchConfiguration
 
     // JobCompletionNotificationListener (File loader)
     @Bean
-    public JobExecutionListener writerListenerBean()
+    public JobExecutionListener jobListen()
     {
-        return new WriterListener();
+        return new JobListener();
     }
 
     // Configure job step
     @Bean
     public Job jobBean()
     {
-        return jobBuilderFactory.get("[Job] MarketEventETLJob")          // Share Quartz Configuration
+        return jobBuilderFactory.get("MarketEventETLJob")          // Share Quartz Configuration
                                 .incrementer(new RunIdIncrementer())  // Automatically parameter increase
-                                .listener   (writerListenerBean())    // Must be Bean
+                                .listener   (jobListen())    // Must be Bean
                                 .flow       (stepBean())
                                 .end()
                                 .build();
@@ -93,9 +93,9 @@ public class BatchConfiguration
         // The job is thus scheduled to run every 2 minute. In fact it should
         // be successful on the first attempt, so the second and subsequent
         // attempts should through a JobInstanceAlreadyCompleteException, so you have to set allowStartIfComplete to true
-        return stepBuilderFactory.get("[Step] MarketEventETLStep")
+        return stepBuilderFactory.get("MarketEventETLStep")
                                  .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
-                                 .<MarketEventDTO, TradeDTO> chunk(10000)  // First:Reader return type. Second:Writer receive type
+                                 .<ReaderReturnDTO, ProcessorReceiveDTO> chunk(1000)  // First:Reader return type. Second:Writer receive type
                                  .reader   (readerBean   ())
                                  .processor(processorBean())
                                  .writer   (writerBean   ())
