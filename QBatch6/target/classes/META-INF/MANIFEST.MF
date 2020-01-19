@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: Spring Batch Tutorial: Spring Boot Example
 Implementation-Version: 0.1
-Built-By: lhk
+Built-By: LHK
 Implementation-Vendor-Id: net.petrikainulainen.spring.batch
 Build-Jdk: 1.8.0_232
 Created-By: Maven Integration for Eclipse
