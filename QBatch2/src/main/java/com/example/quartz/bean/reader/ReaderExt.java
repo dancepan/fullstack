@@ -38,7 +38,7 @@ public class ReaderExt extends FlatFileItemReader<ReaderReturnDTO>
             {
                 setLineTokenizer(new DelimitedLineTokenizer() {
                     { 
-                        setNames(new String[] { "stock", "time", "price", "shares" });
+                        setNames(new String[] { "id", "stock", "time", "price", "shares" });
                     }
                 });
                 

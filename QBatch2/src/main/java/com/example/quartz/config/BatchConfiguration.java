@@ -25,7 +25,7 @@ import com.example.quartz.bean.processor.ProcessorImpl;
 import com.example.quartz.bean.reader.ReaderExt;
 import com.example.quartz.bean.reader.ReaderImpl;
 import com.example.quartz.bean.writer.WriterImpl;
-import com.example.quartz.bean.writer.WriterJpaImpl;
+import com.example.quartz.bean.writer.WriterDBImpl;
 import com.example.quartz.model.BizVO;
 import com.example.quartz.model.ProcessorReceiveDTO;
 
@@ -50,8 +50,8 @@ public class BatchConfiguration
         return new BizVO();
     }
 
-    public WriterJpaImpl setupOverallWriter() {
-        return new WriterJpaImpl();
+    public WriterDBImpl setupOverallWriter() {
+        return new WriterDBImpl();
     }
     
     // FxMarketEventReader (Reader)
@@ -107,7 +107,7 @@ public class BatchConfiguration
                                  .reader   (new ReaderImpl   ())
                                  .processor(processorBean())
                                //.writer   (writerBean   ())
-                                 .writer   (new WriterJpaImpl())
+                                 .writer   (new WriterDBImpl())
                                  .build();
     }
 }

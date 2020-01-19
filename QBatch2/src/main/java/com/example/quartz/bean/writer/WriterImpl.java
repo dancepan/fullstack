@@ -41,24 +41,24 @@ public class WriterImpl implements ItemWriter<ProcessorReceiveDTO>
         {
             if (bizVO.containsKey(t.getStock())) 
             {
-                double tradePrice = t.getPrice();
+                String tradePrice = t.getPrice();
                 
                 FileWriteDTO priceDetails = bizVO.get(t.getStock());
                 
-                // Set highest price
-                if (tradePrice > priceDetails.getHigh())
-                {
-                    priceDetails.setHigh(tradePrice);
-                }
-                
-                // Set lowest price
-                if (tradePrice < priceDetails.getLow())
-                {
-                    priceDetails.setLow(tradePrice);
-                }
-                
-                // Set close price
-                priceDetails.setClose(tradePrice);
+//                // Set highest price
+//                if (tradePrice > priceDetails.getHigh())
+//                {
+//                    priceDetails.setHigh(tradePrice);
+//                }
+//                
+//                // Set lowest price
+//                if (tradePrice < priceDetails.getLow())
+//                {
+//                    priceDetails.setLow(tradePrice);
+//                }
+//                
+//                // Set close price
+//                priceDetails.setClose(tradePrice);
                 
                 bizVO.put(t.getStock(), 
                     new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));

@@ -24,7 +24,7 @@ public class ReaderImpl implements ItemReader<ReaderReturnDTO>
 		
 		ReaderReturnDTO readerReturnDTO = new ReaderReturnDTO();
 		
-		readerReturnDTO.setId    (readCount);
+		readerReturnDTO.setId    ( String.valueOf(readCount));
 		readerReturnDTO.setPrice ("1");
 		readerReturnDTO.setShares("2");
 		readerReturnDTO.setStock ("2");

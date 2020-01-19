@@ -13,8 +13,8 @@ import lombok.Data;
 public class FileWriteDTO
 {
 	private String stock;
-	private double open;
-	private double close;
-	private double low;
-	private double high;
+	private String open;
+	private String close;
+	private String low;
+	private String high;
 }

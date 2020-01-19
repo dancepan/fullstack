@@ -32,9 +32,9 @@ import com.example.quartz.model.FileWriteDTO;
  * @author ashraf
  */
 @StepScope
-public class WriterJpaImpl implements ItemWriter<ProcessorReceiveDTO>
+public class WriterDBImpl implements ItemWriter<ProcessorReceiveDTO>
 {
-	private static final Logger log = LoggerFactory.getLogger(WriterJpaImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
 	
 	private JdbcBatchItemWriter<BatchTarget> batchTargetWriter;
 
@@ -45,7 +45,7 @@ public class WriterJpaImpl implements ItemWriter<ProcessorReceiveDTO>
 			                        + "values "
 			                        + "(:column1, :column2, :column3, :column4, :column5)";
 	
-	public WriterJpaImpl()
+	public WriterDBImpl()
 	{
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 		
@@ -79,23 +79,14 @@ public class WriterJpaImpl implements ItemWriter<ProcessorReceiveDTO>
     	{
     		BatchTarget batchTarget = new BatchTarget();
     		
-    		batchTarget.setColumn1(record.getId   ());
-    		batchTarget.setColumn2(record.getStock());
-    		batchTarget.setColumn3(record.getStock());
-    		batchTarget.setColumn4(record.getStock());
-    		batchTarget.setColumn5(record.getStock());
+    		batchTarget.setColumn1(record.getId    ());
+    		batchTarget.setColumn2(record.getPrice ());
+    		batchTarget.setColumn3(record.getTime  ());
+    		batchTarget.setColumn4(record.getShares());
+    		batchTarget.setColumn5(record.getStock ());
     		
     		batchTargetList.add(batchTarget);
     	});
-    	
-    	
-    	//batchTarget.setColumn1("1111111111");
-    	//batchTarget.setColumn2("1111111111");
-    	//batchTarget.setColumn3("1111111111");
-    	//batchTarget.setColumn4("1111111111");
-    	//batchTarget.setColumn5("1111111111");
-    	
-    	//batchTargetList.add(batchTarget);
     	
     	this.batchTargetWriter.write(batchTargetList);
     }

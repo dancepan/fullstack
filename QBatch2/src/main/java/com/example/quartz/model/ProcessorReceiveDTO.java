@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProcessorReceiveDTO
 {
-	private int    id;
+	private String id;
 	private String stock;
 	private String time;
-	private double price;
-	private long   shares;
+	private String price;
+	private String shares;
 }
