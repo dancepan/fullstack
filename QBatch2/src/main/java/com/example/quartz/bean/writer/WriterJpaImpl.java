@@ -36,38 +36,36 @@ public class WriterJpaImpl implements ItemWriter<ProcessorReceiveDTO>
 {
 	private static final Logger log = LoggerFactory.getLogger(WriterJpaImpl.class);
 	
-	private JdbcBatchItemWriter<BatchTarget> delegate;
-	
+	private JdbcBatchItemWriter<BatchTarget> batchTargetWriter;
 
     @Autowired
     public SimpleDriverDataSource dataSource;
-    
 	
-	private static final String sql = "insert into batch_target (column1, column2, column3, column4, column5) values (:column1, :column2, :column3, :column4, :column5)";
+	private static final String sql = "insert into batch_target (column1, column2, column3, column4, column5) "
+			                        + "values "
+			                        + "(:column1, :column2, :column3, :column4, :column5)";
 	
-	public WriterJpaImpl() {
+	public WriterJpaImpl()
+	{
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriver(new  org.postgresql.Driver());
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/tipsdb");
+		
+        dataSource.setDriver  (new org.postgresql.Driver());
+        dataSource.setUrl     ("jdbc:postgresql://localhost:5432/tipsdb");
         dataSource.setUsername("tipsuser");
         dataSource.setPassword("tipsuser");
         
         this.dataSource = dataSource;
 	}
 
-    public WriterJpaImpl(DataSource dataSource) {
-        //this.dataSource = dataSource;
-    }
-	
     @BeforeStep
-    public void prepareForWriter() {
-        this.delegate = new JdbcBatchItemWriter<BatchTarget>();
-        this.delegate.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<BatchTarget>());
-        this.delegate.setDataSource(dataSource);
-        this.delegate.setJdbcTemplate(new NamedParameterJdbcTemplate(dataSource));
-        this.delegate.setSql(sql);
-        this.delegate.afterPropertiesSet();
-
+    public void prepareForWriter()
+    {
+        this.batchTargetWriter = new JdbcBatchItemWriter<BatchTarget>();
+        this.batchTargetWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<BatchTarget>());
+        this.batchTargetWriter.setDataSource(dataSource);
+        this.batchTargetWriter.setJdbcTemplate(new NamedParameterJdbcTemplate(dataSource));
+        this.batchTargetWriter.setSql(sql);
+        this.batchTargetWriter.afterPropertiesSet();
     }
     
     @Override
@@ -75,27 +73,30 @@ public class WriterJpaImpl implements ItemWriter<ProcessorReceiveDTO>
     {
     	log.info("[WriterImplJpa] write() trades : " + trades.toString());
     	
-    	//JdbcBatchItemWriter<BatchTarget> batchTargetWriter = new JdbcBatchItemWriter<>();
-    	
-    	//batchTargetWriter.setAssertUpdates(false);
-    	//batchTargetWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
-    	//batchTargetWriter.setSql("INSERT INTO public.batch_target (column1) values ('111111111')");
-    	
     	ArrayList <BatchTarget> batchTargetList = new ArrayList<BatchTarget>();
-    	BatchTarget batchTarget = new BatchTarget();
     	
-    	batchTarget.setColumn1("1111111111");
-    	batchTarget.setColumn2("1111111111");
-    	batchTarget.setColumn3("1111111111");
-    	batchTarget.setColumn4("1111111111");
-    	batchTarget.setColumn5("1111111111");
+    	trades.forEach(record -> 
+    	{
+    		BatchTarget batchTarget = new BatchTarget();
+    		
+    		batchTarget.setColumn1(record.getId   ());
+    		batchTarget.setColumn2(record.getStock());
+    		batchTarget.setColumn3(record.getStock());
+    		batchTarget.setColumn4(record.getStock());
+    		batchTarget.setColumn5(record.getStock());
+    		
+    		batchTargetList.add(batchTarget);
+    	});
     	
-    	batchTargetList.add(batchTarget);
     	
-    	//batchTargetWriter.write(batchTargetList);
-
-    	this.delegate.write(batchTargetList);
+    	//batchTarget.setColumn1("1111111111");
+    	//batchTarget.setColumn2("1111111111");
+    	//batchTarget.setColumn3("1111111111");
+    	//batchTarget.setColumn4("1111111111");
+    	//batchTarget.setColumn5("1111111111");
     	
-    	return;
+    	//batchTargetList.add(batchTarget);
+    	
+    	this.batchTargetWriter.write(batchTargetList);
     }
 }

@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class ReaderReturnDTO 
 {
+	private int    id;
     private String stock;
     private String time;
     private String price;

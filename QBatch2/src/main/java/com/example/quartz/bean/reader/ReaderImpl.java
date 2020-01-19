@@ -18,12 +18,13 @@ public class ReaderImpl implements ItemReader<ReaderReturnDTO>
 	
 	public ReaderImpl() {};
 	
-	public ReaderReturnDTO getResource()
+	public ReaderReturnDTO getResource(int readCount)
 	{
 		log.info("[ReaderImpl] getResource() readCount : " + readCount);
 		
 		ReaderReturnDTO readerReturnDTO = new ReaderReturnDTO();
 		
+		readerReturnDTO.setId    (readCount);
 		readerReturnDTO.setPrice ("1");
 		readerReturnDTO.setShares("2");
 		readerReturnDTO.setStock ("2");
@@ -39,7 +40,7 @@ public class ReaderImpl implements ItemReader<ReaderReturnDTO>
 		
 		if (readCount < 10)
 		{
-			readerReturnDTO = this.getResource();
+			readerReturnDTO = this.getResource(readCount);
 			
 			readCount++;
 		}

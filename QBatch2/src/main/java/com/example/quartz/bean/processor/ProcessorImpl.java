@@ -22,12 +22,13 @@ public class ProcessorImpl implements ItemProcessor<ReaderReturnDTO, ProcessorRe
     @Override
     public ProcessorReceiveDTO process(final ReaderReturnDTO fxMarketEvent) throws Exception
     {
+    	final int       id     =                fxMarketEvent.getId()     ; 
         final String    stock  =                fxMarketEvent.getStock () ;
         final String    time   =                fxMarketEvent.getTime  () ;
         final double    price  = Double.valueOf(fxMarketEvent.getPrice ());
         final long      shares = Long.valueOf  (fxMarketEvent.getShares());
 
-        final ProcessorReceiveDTO  trade  = new ProcessorReceiveDTO(stock, time, price, shares);
+        final ProcessorReceiveDTO trade  = new ProcessorReceiveDTO(id, stock, time, price, shares);
 
         log.info("[ProcessorImpl] process() Converting (" + fxMarketEvent + ") into (" + trade + ")");
 
