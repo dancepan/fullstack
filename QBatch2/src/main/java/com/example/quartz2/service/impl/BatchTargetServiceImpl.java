@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.quartz2.model.ProcessorReceiveDTO;
-import com.example.quartz2.model.entity.BatchTarget;
+import com.example.quartz2.model.entity.TableOneStage;
 import com.example.quartz2.repository.BatchTargetRepository;
 import com.example.quartz2.service.BatchTargetService;
 
@@ -24,14 +24,14 @@ public class BatchTargetServiceImpl implements BatchTargetService
     @Autowired
     BatchTargetRepository batchTargetRepository;
 
-    public List<BatchTarget> findAll() throws InvalidParameterException 
+    public List<TableOneStage> findAll() throws InvalidParameterException 
     {
-        List<BatchTarget> batchTargetList = this.batchTargetRepository.findAll();
+        List<TableOneStage> batchTargetList = this.batchTargetRepository.findAll();
 
         return batchTargetList;
     }
     
-    public void saveAll(List<BatchTarget> batchTargetList) throws InvalidParameterException 
+    public void saveAll(List<TableOneStage> batchTargetList) throws InvalidParameterException 
     {
         this.batchTargetRepository.saveAll(batchTargetList);
     }

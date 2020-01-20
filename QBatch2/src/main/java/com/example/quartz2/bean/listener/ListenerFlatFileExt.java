@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.quartz2.model.BizVO;
 import com.example.quartz2.model.FileWriteDTO;
-import com.example.quartz2.model.entity.BatchTarget;
+import com.example.quartz2.model.entity.TableOneStage;
 import com.example.quartz2.repository.BatchTargetRepository;
 import com.example.quartz2.service.BatchTargetService;
 

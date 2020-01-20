@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.quartz2.model.ProcessorReceiveDTO;
-import com.example.quartz2.model.entity.BatchTarget;
+import com.example.quartz2.model.entity.TableOneStage;
 
 
 @Repository
-public interface BatchTargetRepository extends JpaRepository<BatchTarget, String>
+public interface BatchTargetRepository extends JpaRepository<TableOneStage, String>
 {
 }

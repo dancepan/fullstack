@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class ReaderPublicApi implements ItemReader<List<ReaderItemJson>>
 {
@@ -40,7 +41,7 @@ public class ReaderPublicApi implements ItemReader<List<ReaderItemJson>>
             String serviceKey    = "bg9choiwFZX5JYcIIF76jFiVYe0VwiWdxdpCUldbALWxzJLNZA4Ipq2Z1SVqkZyWSW88og%2Bt8EiOCX9J%2BB3ZUw%3D%3D";
             String numOfRows     = "1"   ;
             String pageNo        = "1"   ;
-            String sidoName      = "서울" ;
+            String sidoName      = URLEncoder.encode("서울", "UTF-8");
             String version       = "1.3" ;
             String returnType    = "json";
             

@@ -3,10 +3,10 @@ package com.example.quartz2.service;
 import java.security.InvalidParameterException;
 import java.util.List;
 
-import com.example.quartz2.model.entity.BatchTarget;
+import com.example.quartz2.model.entity.TableOneStage;
 
 public interface BatchTargetService
 {
-	List<BatchTarget> findAll() throws InvalidParameterException;
-	void              saveAll(List<BatchTarget> batchTargetList) throws InvalidParameterException;
+	List<TableOneStage> findAll() throws InvalidParameterException;
+	void              saveAll(List<TableOneStage> batchTargetList) throws InvalidParameterException;
 }

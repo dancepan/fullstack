@@ -28,7 +28,7 @@ import com.example.quartz2.bean.writer.WriterDTOImpl;
 import com.example.quartz2.model.BizVO;
 import com.example.quartz2.model.ProcessorReceiveDTO;
 import com.example.quartz2.model.ReaderReturnDTO;
-import com.example.quartz2.model.entity.BatchTarget;
+import com.example.quartz2.model.entity.TableOneStage;
 
 /**
  * 

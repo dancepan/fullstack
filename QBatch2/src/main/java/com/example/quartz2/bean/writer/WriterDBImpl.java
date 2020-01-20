@@ -22,7 +22,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import com.example.quartz2.model.BizVO;
 import com.example.quartz2.model.FileWriteDTO;
 import com.example.quartz2.model.ProcessorReceiveDTO;
-import com.example.quartz2.model.entity.BatchTarget;
+import com.example.quartz2.model.entity.TableOneStage;
 import com.example.quartz2.repository.BatchTargetRepository;
 import com.example.quartz2.service.BatchTargetService;
 import com.example.quartz2.service.impl.BatchTargetServiceImpl;
@@ -32,15 +32,32 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
 {
     private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
     
-    private JdbcBatchItemWriter<BatchTarget> batchTargetWriter;
+    private JdbcBatchItemWriter<TableOneStage> batchTargetWriter;
     
     BatchTargetServiceImpl batchTargetServiceImpl;
     
     SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
-    private static final String sql = "insert into batch_target (column1, column2, column3, column4, column5) "
-                                    + "values "
-                                    + "(:column1, :column2, :column3, :column4, :column5)";
+    private static final String sql = "insert into public.table_one_stage                        "
+                                    + "(                                                         "
+                                    + "    column1 , column2 , column3 , column4 , column5       "
+                                    + "  , column6 , column7 , column8 , column9 , column10      "
+                                    + "  , column11, column12, column13, column14, column15      "
+                                    + "  , column16, column17, column18, column19, column20      "
+                                    + "  , column21, column22, column23, column24, column25      "
+                                    + "  , column26, column27, column28, column29, column30      "
+                                    + "  , column31, column32                                    "
+                                    + ")                                                         "
+                                    + "values                                                    "
+                                    + "(                                                         "
+                                    + "    :column1 , :column2 , :column3 , :column4 , :column5  "
+                                    + "  , :column6 , :column7 , :column8 , :column9 , :column10 "
+                                    + "  , :column11, :column12, :column13, :column14, :column15 "
+                                    + "  , :column16, :column17, :column18, :column19, :column20 "
+                                    + "  , :column21, :column22, :column23, :column24, :column25 "
+                                    + "  , :column26, :column27, :column28, :column29, :column30 "
+                                    + "  , :column31, :column32                                  "
+                                    + ")                                                         ";
     
     public WriterDBImpl()
     {
@@ -53,9 +70,9 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
     @BeforeStep
     public void prepareForWriter()
     {
-        this.batchTargetWriter = new JdbcBatchItemWriter<BatchTarget>();
+        this.batchTargetWriter = new JdbcBatchItemWriter<TableOneStage>();
         
-        this.batchTargetWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<BatchTarget>());
+        this.batchTargetWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<TableOneStage>());
         this.batchTargetWriter.setDataSource(dataSource);
         this.batchTargetWriter.setJdbcTemplate(new NamedParameterJdbcTemplate(dataSource));
         this.batchTargetWriter.setSql(sql);
@@ -65,21 +82,52 @@ public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
     @Override
     public void write(List<? extends List<ProcessorReceiveDTO>> items) throws Exception
     {
-        log.info("[WriterImplJpa] write() trades : " + items.toString());
+        log.info("[WriterImplJpa] write() items : " + items.toString());
         
-        ArrayList <BatchTarget> batchTargetList = new ArrayList<BatchTarget>();
+        ArrayList <TableOneStage> batchTargetList = new ArrayList<TableOneStage>();
         
         for (List<ProcessorReceiveDTO> list : items)
         {
-            list.forEach(recored ->
+            log.info("[WriterImplJpa] write() list : " + list.toString());
+            
+            list.forEach(record ->
             {
-                BatchTarget batchTarget = new BatchTarget();
+                log.info("[WriterImplJpa] write() record : " + record.toString());
                 
-                batchTarget.setColumn1(recored.getColumn1());
-                batchTarget.setColumn2(recored.getColumn2());
-                batchTarget.setColumn3(recored.getColumn3());
-                batchTarget.setColumn4(recored.getColumn4());
-                batchTarget.setColumn5(recored.getColumn5());
+                TableOneStage batchTarget = new TableOneStage();
+                
+                batchTarget.setColumn1 (record.getColumn1 ());
+                batchTarget.setColumn2 (record.getColumn2 ());
+                batchTarget.setColumn3 (record.getColumn3 ());
+                batchTarget.setColumn4 (record.getColumn4 ());
+                batchTarget.setColumn5 (record.getColumn5 ());
+                batchTarget.setColumn6 (record.getColumn6 ());
+                batchTarget.setColumn7 (record.getColumn7 ());
+                batchTarget.setColumn8 (record.getColumn8 ());
+                batchTarget.setColumn9 (record.getColumn9 ());
+                batchTarget.setColumn10(record.getColumn10());
+                batchTarget.setColumn11(record.getColumn11());
+                batchTarget.setColumn12(record.getColumn12());
+                batchTarget.setColumn13(record.getColumn13());
+                batchTarget.setColumn14(record.getColumn14());
+                batchTarget.setColumn15(record.getColumn15());
+                batchTarget.setColumn16(record.getColumn16());
+                batchTarget.setColumn17(record.getColumn17());
+                batchTarget.setColumn18(record.getColumn18());
+                batchTarget.setColumn19(record.getColumn19());
+                batchTarget.setColumn20(record.getColumn20());
+                batchTarget.setColumn25(record.getColumn21());
+                batchTarget.setColumn25(record.getColumn22());
+                batchTarget.setColumn25(record.getColumn23());
+                batchTarget.setColumn25(record.getColumn24());
+                batchTarget.setColumn25(record.getColumn25());
+                batchTarget.setColumn25(record.getColumn26());
+                batchTarget.setColumn25(record.getColumn27());
+                batchTarget.setColumn25(record.getColumn28());
+                batchTarget.setColumn25(record.getColumn29());
+                batchTarget.setColumn25(record.getColumn30());
+                batchTarget.setColumn31(record.getColumn31());
+                batchTarget.setColumn32(record.getColumn32());
                 
                 batchTargetList.add(batchTarget);
             });
