@@ -49,7 +49,7 @@ public class QuartzConfiguration
         
         Map<String, Object> map = new HashMap<String, Object>();
         
-        map.put("jobName"    , "MarketEventETLJob");
+        map.put("jobName"    , "ETLJob");
         map.put("jobLauncher", jobLauncher);
         map.put("jobLocator" , jobLocator);
         

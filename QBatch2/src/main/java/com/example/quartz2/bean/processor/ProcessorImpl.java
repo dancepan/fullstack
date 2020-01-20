@@ -1,5 +1,6 @@
 package com.example.quartz2.bean.processor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,30 +11,28 @@ import org.springframework.batch.item.ItemProcessor;
 import com.example.quartz2.model.ProcessorReceiveDTO;
 import com.example.quartz2.model.ReaderReturnDTO;
 
-/**
- * The Class FxMarketEventProcessor.
- * 
- * @author ashraf
- */
-public class ProcessorImpl implements ItemProcessor<ReaderReturnDTO, ProcessorReceiveDTO>
+public class ProcessorImpl implements ItemProcessor<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>>
 {
     private static final Logger log = LoggerFactory.getLogger(ProcessorImpl.class);
 
+    List<ProcessorReceiveDTO> processorReceiveDTO = new ArrayList<ProcessorReceiveDTO>();
+    
     @Override
-    public ProcessorReceiveDTO process(final ReaderReturnDTO fxMarketEvent) throws Exception
+    public List<ProcessorReceiveDTO> process(final List<ReaderReturnDTO> items) throws Exception
     {
-    	final String    id     =                fxMarketEvent.getId()     ; 
-        final String    stock  =                fxMarketEvent.getStock () ;
-        final String    time   =                fxMarketEvent.getTime  () ;
-        final String    price  =                fxMarketEvent.getPrice () ;
-        final String    shares =                fxMarketEvent.getShares() ;
-      //final String    price  = Double.valueOf(fxMarketEvent.getPrice ());
-      //final String    shares = Long.valueOf  (fxMarketEvent.getShares());
-
-        final ProcessorReceiveDTO trade = new ProcessorReceiveDTO(id, stock, time, price, shares);
-
-        log.info("[ProcessorImpl] process() Converting (" + fxMarketEvent + ") into (" + trade + ")");
-
-        return trade;
+        for (ReaderReturnDTO record : items)
+        {
+            ProcessorReceiveDTO ProcessorReceiveDTOObj = new ProcessorReceiveDTO();
+            
+            ProcessorReceiveDTOObj.setColumn1(record.getColumn1());
+            ProcessorReceiveDTOObj.setColumn2(record.getColumn2());
+            ProcessorReceiveDTOObj.setColumn3(record.getColumn3());
+            ProcessorReceiveDTOObj.setColumn4(record.getColumn4());
+            ProcessorReceiveDTOObj.setColumn5(record.getColumn5());
+            
+            processorReceiveDTO.add(ProcessorReceiveDTOObj);
+        }
+        
+        return processorReceiveDTO;
     }
 }

@@ -25,35 +25,30 @@ import com.example.quartz2.model.ProcessorReceiveDTO;
 import com.example.quartz2.model.entity.BatchTarget;
 import com.example.quartz2.repository.BatchTargetRepository;
 import com.example.quartz2.service.BatchTargetService;
+import com.example.quartz2.service.impl.BatchTargetServiceImpl;
 
-/**
- * The Class StockPriceAggregator.
- * 
- * @author ashraf
- */
 @StepScope
-public class WriterDBImpl implements ItemWriter<ProcessorReceiveDTO>
+public class WriterDBImpl implements ItemWriter<List<ProcessorReceiveDTO>>
 {
-	private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
-	
-	private JdbcBatchItemWriter<BatchTarget> batchTargetWriter;
-	
-	SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+    private static final Logger log = LoggerFactory.getLogger(WriterDBImpl.class);
+    
+    private JdbcBatchItemWriter<BatchTarget> batchTargetWriter;
+    
+    BatchTargetServiceImpl batchTargetServiceImpl;
+    
+    SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
-    //@Autowired
-    //public SimpleDriverDataSource dataSource;
-	
-	private static final String sql = "insert into batch_target (column1, column2, column3, column4, column5) "
-			                        + "values "
-			                        + "(:column1, :column2, :column3, :column4, :column5)";
-	
-	public WriterDBImpl()
-	{
+    private static final String sql = "insert into batch_target (column1, column2, column3, column4, column5) "
+                                    + "values "
+                                    + "(:column1, :column2, :column3, :column4, :column5)";
+    
+    public WriterDBImpl()
+    {
         dataSource.setDriver  (new org.postgresql.Driver());
         dataSource.setUrl     ("jdbc:postgresql://localhost:5432/tipsdb");
         dataSource.setUsername("tipsuser");
         dataSource.setPassword("tipsuser");
-	}
+    }
 
     @BeforeStep
     public void prepareForWriter()
@@ -68,25 +63,28 @@ public class WriterDBImpl implements ItemWriter<ProcessorReceiveDTO>
     }
     
     @Override
-    public void write(List<? extends ProcessorReceiveDTO> trades) throws Exception
+    public void write(List<? extends List<ProcessorReceiveDTO>> items) throws Exception
     {
-    	log.info("[WriterImplJpa] write() trades : " + trades.toString());
-    	
-    	ArrayList <BatchTarget> batchTargetList = new ArrayList<BatchTarget>();
-    	
-    	trades.forEach(record -> 
-    	{
-    		BatchTarget batchTarget = new BatchTarget();
-    		
-    		batchTarget.setColumn1(record.getId    ());
-    		batchTarget.setColumn2(record.getPrice ());
-    		batchTarget.setColumn3(record.getTime  ());
-    		batchTarget.setColumn4(record.getShares());
-    		batchTarget.setColumn5(record.getStock ());
-    		
-    		batchTargetList.add(batchTarget);
-    	});
-    	
-    	this.batchTargetWriter.write(batchTargetList);
+        log.info("[WriterImplJpa] write() trades : " + items.toString());
+        
+        ArrayList <BatchTarget> batchTargetList = new ArrayList<BatchTarget>();
+        
+        for (List<ProcessorReceiveDTO> list : items)
+        {
+            list.forEach(recored ->
+            {
+                BatchTarget batchTarget = new BatchTarget();
+                
+                batchTarget.setColumn1(recored.getColumn1());
+                batchTarget.setColumn2(recored.getColumn2());
+                batchTarget.setColumn3(recored.getColumn3());
+                batchTarget.setColumn4(recored.getColumn4());
+                batchTarget.setColumn5(recored.getColumn5());
+                
+                batchTargetList.add(batchTarget);
+            });
+            
+            this.batchTargetWriter.write(batchTargetList);
+        }
     }
 }

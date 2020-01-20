@@ -7,18 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * The Class Trade.
- * 
- * @author ashraf
- */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProcessorReceiveDTO
 {
-	private String id;
-	private String stock;
-	private String time;
-	private String price;
-	private String shares;
+	private String column1;
+	private String column2;
+	private String column3;
+	private String column4;
+	private String column5;
 }

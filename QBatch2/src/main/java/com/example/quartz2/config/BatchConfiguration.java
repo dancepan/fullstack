@@ -110,7 +110,7 @@ public class BatchConfiguration
     @Bean
     public Job jobBean()
     {
-        return jobBuilderFactory.get("MarketEventETLJob")            // Share Quartz Configuration
+        return jobBuilderFactory.get("ETLJob")                       // Share Quartz Configuration
                                 .incrementer(runIdIncrementer   ())  // Automatically parameter increase
                                 .listener   (listenerFlatFileExt())  // Must be Bean
                                 .flow       (stepBean())
@@ -124,9 +124,10 @@ public class BatchConfiguration
         // The job is thus scheduled to run every 2 minute. In fact it should
         // be successful on the first attempt, so the second and subsequent
         // attempts should through a JobInstanceAlreadyCompleteException, so you have to set allowStartIfComplete to true
-        return stepBuilderFactory.get("MarketEventETLStep")
-                                 .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
-                                 .<ReaderReturnDTO, ProcessorReceiveDTO> chunk(1000)  // First:Reader return type. Second:Writer receive type
+        return stepBuilderFactory.get("ETLStep")
+                                 .allowStartIfComplete(true)                                      // allows step re-runnig although there is job that success
+                               //.<     ReaderReturnDTO,       ProcessorReceiveDTO>  chunk(1000)  // First:Reader return type. Second:Writer receive type
+                                 .<List<ReaderReturnDTO>, List<ProcessorReceiveDTO>> chunk(1)     // First:Reader return type. Second:Writer receive type
                                //.reader   (readerFlatFileExt())
                                //.reader   (readerDummyImpl  ())
                                  .reader   (readerRestApiImpl())

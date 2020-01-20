@@ -31,19 +31,19 @@ public class WriterDTOImpl implements ItemWriter<ProcessorReceiveDTO>
     BatchTargetRepository batchTargetRepository;
 
     @Override
-    public void write(List<? extends ProcessorReceiveDTO> trades) throws Exception
+    public void write(List<? extends ProcessorReceiveDTO> items) throws Exception
     {
-    	log.info("[WriterImpl] write() trades : " + trades.toString());
+    	log.info("[WriterImpl] write() items : " + items.toString());
     	
         // Transfer to VO
-        trades.forEach(t ->
+    	items.forEach(t ->
         {
-            if (bizVO.containsKey(t.getStock())) 
-            {
-                String tradePrice = t.getPrice();
-                
-                FileWriteDTO priceDetails = bizVO.get(t.getStock());
-                
+//            if (bizVO.containsKey(t.getStock())) 
+//            {
+//                String column1 = t.getColumn1();
+//                
+//                FileWriteDTO priceDetails = bizVO.get(t.getColumn1());
+//                
 //                // Set highest price
 //                if (tradePrice > priceDetails.getHigh())
 //                {
@@ -58,15 +58,15 @@ public class WriterDTOImpl implements ItemWriter<ProcessorReceiveDTO>
 //                
 //                // Set close price
 //                priceDetails.setClose(tradePrice);
-                
-                bizVO.put(t.getStock(), 
-                    new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
-            }
-            else
-            {
-            	bizVO.put(t.getStock(),
-                    new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
-            }
+//                
+//                bizVO.put(t.g.getStock(), 
+//                    new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
+//            }
+//            else
+//            {
+//            	bizVO.put(t.getStock(),
+//                    new FileWriteDTO(t.getStock(), t.getPrice(), t.getPrice(), t.getPrice(), t.getPrice()));
+//            }
         });
     }
 }

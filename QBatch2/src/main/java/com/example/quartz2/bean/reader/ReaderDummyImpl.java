@@ -24,11 +24,11 @@ public class ReaderDummyImpl implements ItemReader<ReaderReturnDTO>
 		
 		ReaderReturnDTO readerReturnDTO = new ReaderReturnDTO();
 		
-		readerReturnDTO.setId    ( String.valueOf(readCount));
-		readerReturnDTO.setPrice ("1");
-		readerReturnDTO.setShares("2");
-		readerReturnDTO.setStock ("2");
-		readerReturnDTO.setTime  ("4");
+		readerReturnDTO.setColumn1(String.valueOf(readCount));
+		readerReturnDTO.setColumn2("1");
+		readerReturnDTO.setColumn3("2");
+		readerReturnDTO.setColumn4("2");
+		readerReturnDTO.setColumn5("4");
 		
 		return readerReturnDTO;
 	}

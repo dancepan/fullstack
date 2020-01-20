@@ -2,17 +2,12 @@ package com.example.quartz2.model;
 
 import lombok.Data;
 
-/**
- * The Class FxMarketEvent.
- * 
- * @author ashraf
- */
 @Data
 public class ReaderReturnDTO 
 {
-	private String id;
-    private String stock;
-    private String time;
-    private String price;
-    private String shares;
+	private String column1;
+    private String column2;
+    private String column3;
+    private String column4;
+    private String column5;
 }
