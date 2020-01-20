@@ -16,8 +16,11 @@ import javax.persistence.Id;
 @Table(name = "TABLE_ONE")
 public class TableOne implements Serializable
 {
+     
     @Id
-    @Column private String id;    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column private String id; 
+    
     @Column private String returntype;
     @Column private String cograde;
     @Column private String covalue;

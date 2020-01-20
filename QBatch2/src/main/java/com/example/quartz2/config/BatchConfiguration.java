@@ -21,6 +21,7 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import com.example.quartz2.bean.listener.ListenerFlatFileExt;
 import com.example.quartz2.bean.processor.ProcessorImpl;
 import com.example.quartz2.bean.reader.ReaderFlatFileExt;
+import com.example.quartz2.bean.reader.ReaderRestApiImpl;
 import com.example.quartz2.bean.reader.ReaderDummyImpl;
 import com.example.quartz2.bean.writer.WriterDBImpl;
 import com.example.quartz2.bean.writer.WriterDTOImpl;
@@ -44,7 +45,20 @@ public class BatchConfiguration
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
+    // VO --------------------------------------------------------------------
+    @Bean
+    public BizVO bizVO()
+    {
+        return new BizVO();
+    }
+    
     // Reader ----------------------------------------------------------------
+    @Bean
+    public ReaderRestApiImpl readerRestApiImpl()
+    {
+        return new ReaderRestApiImpl();
+    }
+    
     @Bean
     public ReaderFlatFileExt readerFlatFileExt()
     {
@@ -91,13 +105,7 @@ public class BatchConfiguration
     	return new RunIdIncrementer();
     }
     
-    // VO --------------------------------------------------------------------
-    @Bean
-    public BizVO bizVO()
-    {
-        return new BizVO();
-    }
-    
+    // Job Step Configuration ------------------------------------------------
     // Configure job step
     @Bean
     public Job jobBean()
@@ -119,8 +127,9 @@ public class BatchConfiguration
         return stepBuilderFactory.get("MarketEventETLStep")
                                  .allowStartIfComplete(true)  // allows step rerunnig if there is job that success
                                  .<ReaderReturnDTO, ProcessorReceiveDTO> chunk(1000)  // First:Reader return type. Second:Writer receive type
-                                 .reader   (readerFlatFileExt())
+                               //.reader   (readerFlatFileExt())
                                //.reader   (readerDummyImpl  ())
+                                 .reader   (readerRestApiImpl())
                                  .processor(processorImpl    ())
                                //.writer   (writerDTOImpl    ())
                                  .writer   (writerDBImpl     ())
